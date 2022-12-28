@@ -1,0 +1,15 @@
+{
+  "name": "codial",
+  "version": "1.0.0",
+  "description": "social media website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "ankit Sankhyan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
