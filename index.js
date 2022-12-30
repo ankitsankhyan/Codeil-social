@@ -4,7 +4,8 @@ const expressEjsLayouts = require('express-ejs-layouts');
 const port = 8000;
 const app = express();
 
-
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 const db = require('./config/mongoose');
 app.use(express.static('./assets'));
 app.set('view engine', 'ejs');
@@ -16,7 +17,7 @@ app.set('layout extractScripts', true);
 
 app.use(expressEjsLayouts);  
 app.use('/', require('./routes/index'))
-app.use('/profile', require('./routes/user'))
+app.use('/user', require('./routes/user'))
 
 app.listen(port, function (err) {
   if (err) {

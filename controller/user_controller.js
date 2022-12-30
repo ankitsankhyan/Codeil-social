@@ -9,8 +9,14 @@ module.exports.favarate_sport = function(req, res){
 }
 
 
-module.exports.sign_in = function(req, res){
-    return res.render('sign_in.ejs',{
-          title:'sign-in page'
+module.exports.signup = function(req, res){
+    return res.render('sign_up.ejs',{
+          title:'sign-up page'
     })
+}
+
+module.exports.signIn = function(req,res){
+    return res.render('sign_in',{
+        title: "Codiel| sign-in"
+    });
 }
