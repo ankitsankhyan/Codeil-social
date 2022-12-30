@@ -2,11 +2,26 @@
 // taking user schema in the file (model)
 const user = require('../model/user');
 module.exports.profile = function(req, res){
-    return res.render('user', {
-        title: 'Profile'
-    });
-}
+     user.findOne({_id: req.cookies.user_id}, function(err, User){
+        if(err){
+            console.log('could not find user from cookie in profile');
+        }
+        console.log('in profile', User);
+              if(User){
+               return res.render('user_found.ejs', {
+                    title: 'profile',
+                    name: User.name,
+                    email: User.email
+                });
+            
+              }else{
+                return res.redirect('/user/sign-in');
+              }
+     })
 
+    
+}
+ 
 module.exports.favarate_sport = function(req, res){
     res.end('<h1> Cricket is my fav game <h1>');
 }
@@ -62,5 +77,21 @@ module.exports.create = function(req, res){
 
 module.exports.createSession = function(req, res){
     // to do later
-    res.end('<h1>To be done later</h1>');
+    user.findOne({email: req.body.email}, function(err, User){
+        if(err){
+            console.log('error in finding user');
+            return;
+        }
+          console.log(User , 'in create session');
+        if(User){
+            if(User.password != req.body.password){
+               return res.redirect('back');
+            }else{
+                res.cookie('user_id',User.id);
+                return res.redirect('/user/profile');
+            }
+        }
+      
+    })
 }
+

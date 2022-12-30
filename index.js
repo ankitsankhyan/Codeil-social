@@ -22,8 +22,8 @@ app.set('layout extractScripts', true);
 // using express layouts
  
 app.use(expressEjsLayouts);  
-app.use('/home', require('./routes/index'))
-app.use('/user', require('./routes/user'))
+app.use('/home', require('./routes/index')); 
+app.use('/user', require('./routes/user'));
  
 app.listen(port, function (err) {
   if (err) {
