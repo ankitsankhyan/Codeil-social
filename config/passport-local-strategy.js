@@ -26,7 +26,7 @@ passort.serializeUser(function(user,done){
 })
 
 passort.deserializeUser(function(user, done){
-    user.findById(id, function(err, user){
+    User.findById(user.id, function(err, user){
       if(err){
         console.log('Error in finding user --> passport');
         done(err);

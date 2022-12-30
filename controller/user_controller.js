@@ -62,5 +62,5 @@ module.exports.create = function(req, res){
 
 module.exports.createSession = function(req, res){
     // to do later
-    res.end('<h1>To be done later</h1>');
+     return res.redirect('/home');
 }
