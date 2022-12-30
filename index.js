@@ -4,6 +4,12 @@ const expressEjsLayouts = require('express-ejs-layouts');
 const port = 8000;
 const app = express();
 
+// body parser
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
+// cookie parser
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 const db = require('./config/mongoose');
@@ -14,11 +20,11 @@ app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
 
 // using express layouts
-
+ 
 app.use(expressEjsLayouts);  
-app.use('/', require('./routes/index'))
+app.use('/home', require('./routes/index'))
 app.use('/user', require('./routes/user'))
-
+ 
 app.listen(port, function (err) {
   if (err) {
     console.log('could not be started');
