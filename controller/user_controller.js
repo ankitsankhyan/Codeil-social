@@ -34,6 +34,8 @@ module.exports.signup = function(req, res){
 }
 
 module.exports.signIn = function(req,res){
+    console.log(res.cookies);
+    res.clearCookie('user_id');
     return res.render('sign_in',{
         title: "Codiel| sign-in"
     });
