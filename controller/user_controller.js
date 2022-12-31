@@ -89,6 +89,9 @@ module.exports.createSession = function(req, res){
             if(User.password != req.body.password){
                return res.redirect('back');
             }else{
+
+                // added cookie inside response
+
                 res.cookie('user_id',User.id);
                 return res.redirect('/user/profile');
             }
