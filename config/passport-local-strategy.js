@@ -1,6 +1,7 @@
 const User = require('../model/user');
 
 const passort = require('passport');
+const passport = require('passport');
 
 const localstratagy = require('passport-local').Strategy;
 
@@ -34,3 +35,25 @@ passort.deserializeUser(function(user, done){
        return done(null, user);
     })
 });
+
+// check if user is authenticated 
+// this is used as middleware only
+  passort.checkAuthentication = function(req, res, next){
+    // if user is present then pass to the next i.e controller action
+    if(req.isAuthenticated()){
+        return next();
+    }else{
+        return res.redirect('/user/sign-in');
+    }
+  }
+
+//   if user is already signed in
+
+passort.setAuthenticatedUser = function(req, res, next){
+    if(req.isAuthenticated()){
+        res.locals.user = req.user;
+    }
+
+    next();
+}
+module.exports = passport;

@@ -7,7 +7,7 @@ const user_profile = require('../controller/user_controller');
 const homecontroller = require('../controller/home_controller');
 
 router.get('/', homecontroller.home);
-router.get('/profile', user_profile.profile);
+router.get('/profile',passort.checkAuthentication ,user_profile.profile);
 router.get('/fav', user_profile.favarate_sport);
 router.get('/sign-in', user_profile.signIn);
 
