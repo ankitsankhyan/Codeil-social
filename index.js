@@ -26,9 +26,15 @@ app.set('layout extractScripts', true);
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//connect mongo to store cookies permanently
+
+const moongostore = require('connect-mongo').session;
+
 // cookie parser
 
 const cookieParser = require('cookie-parser');
+const  Mongoose  = require('mongoose');
+const MongoStore = require('connect-mongo');
 
 app.use(cookieParser());
 
@@ -65,7 +71,29 @@ resave: "false",
  cookie:{
   maxAge:(1000*60*100),
 
- } 
+ } ,
+
+// solution given on mongoStore documentation
+
+ store: MongoStore.create({
+  mongoUrl: 'mongodb://localhost/test-app', 
+  autoRemove: 'disabled'
+})
+
+// solution using MongoStore constructor only
+
+//  store : new MongoStore(
+//     {
+//       // refer the documentation 
+//       // we provided the url where data is stored
+ 
+//       mongoUrl: 'mongodb://localhost/codial_development',
+//       autoRemove : 'disabled'
+//     }, 
+//       function(err){
+//         console.log(err || 'connect-mongodb setup ok');
+//       }
+//  )
 }));
 
 // more middlewares
