@@ -3,8 +3,20 @@ const expressEjsLayouts = require('express-ejs-layouts');
 
 const port = 8000;
 const app = express();
+// 
+const sassMiddleware = require('node-sass-middleware');
 
+app.use(sassMiddleware({
+  // will try to encode from scss folder then put inside css folder
+  src:'./assets/scss',
+  dest:'./assets/css',
+  debug: true,
+  outputStyle:'expanded',
 
+  // here link related to this prefix is considered and from location scss file is taken and put into destination
+
+  prefix: '/css'
+}))
 const db = require('./config/mongoose');
 
 
