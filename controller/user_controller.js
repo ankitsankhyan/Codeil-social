@@ -4,7 +4,8 @@ const user = require('../model/user');
 module.exports.profile = function(req, res){
     return res.render('user', {
         title: 'Profile',
-        user: req.user
+        user: req.user,
+        local: res.locals
     });
 }
 
@@ -15,13 +16,15 @@ module.exports.favarate_sport = function(req, res){
 
 module.exports.signup = function(req, res){
     return res.render('sign_up.ejs',{
-          title:'sign-up page'
+          title:'sign-up page',
+          local: res.locals
     })
 }
 
 module.exports.signIn = function(req,res){
     return res.render('sign_in',{
-        title: "Codiel| sign-in"
+        title: "Codiel| sign-in",
+        local: res.locals
     });
 }
 
@@ -42,7 +45,8 @@ module.exports.create = function(req, res){
             user.create({
                 email: req.body.email,
                 password: req.body.password,
-                name: req.body.name
+                name: req.body.name,
+                
 
             }, function(err, user){
                 if(err){
@@ -64,4 +68,11 @@ module.exports.create = function(req, res){
 module.exports.createSession = function(req, res){
     // to do later
      return res.redirect('/user/profile');
+}
+
+module.exports.destroySession = function(req,res){
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/home');
+      });
 }

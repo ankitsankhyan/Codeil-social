@@ -1,3 +1,17 @@
 <header>
    <h1>Page header</h1> 
 </header>
+
+<% if(local.user) {%>
+   <!-- don't need to write http  as shown-->
+ <!-- <button><a href="//http://localhost:8000/user/sign-out">Sign-out</a></button>   -->
+
+ <button><a href="//localhost:8000/user/sign-out">Sign-out</a></button> 
+
+    <%}else{%>
+
+      <!-- here // address   means address is absolute -->
+ <button><a href="//localhost:8000/user/sign-in">Sign-in</a></button>
+ <button><a href="//localhost:8000/user/sign-up">Sign-up</a></button>
+
+       <%}%>

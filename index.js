@@ -101,6 +101,8 @@ resave: "false",
 app.use(passport.initialize());
 app.use(passport.session());
 
+// in each call this function is used to copy the cookie
+
 app.use(passport.setAuthenticatedUser)
 
 
