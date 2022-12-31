@@ -4,23 +4,37 @@ const expressEjsLayouts = require('express-ejs-layouts');
 const port = 8000;
 const app = express();
 
+
+const db = require('./config/mongoose');
+
+
+// using express session
+
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+
+
+// using express layouts
+ 
+app.use(expressEjsLayouts);  
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
+
 // body parser
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const session = require('express-session');
-const passort = require('passport');
-const passportLocal = require('./config/passport-local-strategy');
-
 // cookie parser
 
 const cookieParser = require('cookie-parser');
+
 app.use(cookieParser());
 
 
 
-const db = require('./config/mongoose');
+
 app.use(express.static('./assets'));
 app.set('view engine', 'ejs');
 app.set('views', './views') // Note we can use ./views instead of path.join function
@@ -56,17 +70,13 @@ resave: "false",
 
 // more middlewares
 
-app.use(passort.initialize());
-app.use(passort.session());
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser)
 
 
 
-
-// using express layouts
- 
-app.use(expressEjsLayouts);  
-app.set('layout extractStyles', true);
-app.set('layout extractScripts', true);
 
 // routing
 

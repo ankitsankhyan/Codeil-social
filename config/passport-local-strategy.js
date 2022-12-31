@@ -1,11 +1,11 @@
 const User = require('../model/user');
 
-const passort = require('passport');
+
 const passport = require('passport');
 
 const localstratagy = require('passport-local').Strategy;
 
-passort.use(new localstratagy({
+passport.use(new localstratagy({
     usernameField: 'email'
 },  function(email, password, done){
     User.findOne({email : email}, function(err, user){
@@ -22,12 +22,17 @@ passort.use(new localstratagy({
     });
 }))
 
-passort.serializeUser(function(user,done){
+// put user id in cookie in encrypted manner
+
+passport.serializeUser(function(user,done){
     done(null, user.id);
 })
+ 
 
-passort.deserializeUser(function(user, done){
-    User.findById(user.id, function(err, user){
+// deserializeUser takes id as input and find corresponding user which is passed in request
+
+passport.deserializeUser(function(id, done){
+    User.findById(id, function(err, user){
       if(err){
         console.log('Error in finding user --> passport');
         done(err);
@@ -38,22 +43,40 @@ passort.deserializeUser(function(user, done){
 
 // check if user is authenticated 
 // this is used as middleware only
-  passort.checkAuthentication = function(req, res, next){
-    // if user is present then pass to the next i.e controller action
+
+passport.checkAuthentication = function(req, res, next){
+    
+    // if user is present then pass to the next function i.e controller action
+
     if(req.isAuthenticated()){
         return next();
-    }else{
-        return res.redirect('/user/sign-in');
     }
+       
+    // if the user is not signed in
+
+    return res.redirect('/user/sign-in');
+    
   }
 
 //   if user is already signed in
 
-passort.setAuthenticatedUser = function(req, res, next){
+passport.setAuthenticatedUser = function(req, res, next){
     if(req.isAuthenticated()){
+
+        // users data is sent to the response from req.user which is managed by (passport)
+
         res.locals.user = req.user;
     }
 
     next();
+}
+passport.priorLogin = function(req, res, next){
+    if(!req.isAuthenticated()){
+        next();
+    }else{
+        return res.redirect('/user/profile');
+    }
+
+   
 }
 module.exports = passport;
