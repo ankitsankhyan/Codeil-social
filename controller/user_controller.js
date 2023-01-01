@@ -1,5 +1,6 @@
 
 // taking user schema in the file (model)
+const { resolveObjectURL } = require('buffer');
 const user = require('../model/user');
 module.exports.profile = function(req, res){
      user.findOne({_id: req.cookies.user_id}, function(err, User){
@@ -34,8 +35,10 @@ module.exports.signup = function(req, res){
 }
 
 module.exports.signIn = function(req,res){
-    console.log(res.cookies);
-    res.clearCookie('user_id');
+    // cookie parser puts the cookie in response
+    if(req.cookies.user_id != undefined){
+        return res.redirect('/user/profile');
+    }
     return res.render('sign_in',{
         title: "Codiel| sign-in"
     });
@@ -78,7 +81,7 @@ module.exports.create = function(req, res){
 
 
 module.exports.createSession = function(req, res){
-    // to do later
+    
     user.findOne({email: req.body.email}, function(err, User){
         if(err){
             console.log('error in finding user');
@@ -91,6 +94,7 @@ module.exports.createSession = function(req, res){
             }else{
 
                 // added cookie inside response
+                // cookie is constructor which creates attribute inside cookie in response
 
                 res.cookie('user_id',User.id);
                 return res.redirect('/user/profile');
@@ -98,5 +102,11 @@ module.exports.createSession = function(req, res){
         }
       
     })
+}
+
+module.exports.destroy = function(req, res){
+    console.log(req.cookies, 'in destroy');
+    res.clearCookie('user_id');
+    return res.redirect('/user/sign-in');
 }
 

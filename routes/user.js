@@ -13,4 +13,5 @@ router.get('/sign-in', user_profile.signIn);
 router.post('/create-session', user_profile.createSession);
 router.get('/sign-up', user_profile.signup)
 router.post('/create', user_profile.create);
+router.get('/sign-out', user_profile.destroy);
 module.exports = router;
