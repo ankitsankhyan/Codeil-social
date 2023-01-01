@@ -9,10 +9,10 @@ const sassMiddleware = require('node-sass-middleware');
 app.use(sassMiddleware({
   // will try to encode from scss folder then put inside css folder
   src:'./assets/scss',
-  dest:'./assets/css',
+  dest:'./assets/css', 
   debug: true,
-  outputStyle:'expanded',
-
+  outputStyle:'compact',
+ 
   // here link related to this prefix is considered and from location scss file is taken and put into destination
 
   prefix: '/css'
@@ -23,6 +23,9 @@ const db = require('./config/mongoose');
 // using express session
 
 const session = require('express-session');
+
+// using passport and strategy
+
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 
@@ -40,7 +43,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //connect mongo to store cookies permanently
 
-const moongostore = require('connect-mongo').session;
 
 // cookie parser
 
@@ -48,6 +50,9 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 const  Mongoose  = require('mongoose');
+
+//using MongoStore
+
 const MongoStore = require('connect-mongo');
 
 
@@ -103,7 +108,7 @@ resave: "false",
 //     {
 //       // refer the documentation 
 //       // we provided the url where data is stored
- 
+  
 //       mongoUrl: 'mongodb://localhost/codial_development',
 //       autoRemove : 'disabled'
 //     }, 
@@ -113,11 +118,13 @@ resave: "false",
 //  )
 }));
 
+
+
 // more middlewares
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+ 
 // in each call this function is used to copy the cookie
 
 app.use(passport.setAuthenticatedUser);
@@ -141,3 +148,4 @@ app.listen(port, function (err) {
 
   console.log(`working fine at the ${port}`);
 })
+

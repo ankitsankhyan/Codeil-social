@@ -9,9 +9,14 @@ const homecontroller = require('../controller/home_controller');
 
 
 router.get('/fav', user_profile.favarate_sport);
-router.get('/sign-in',passport.priorLogin, user_profile.signIn);
 
+// checking prior login in user_profile using passport as middleware
+
+router.get('/sign-in',passport.priorLogin, user_profile.signIn);
 router.get('/sign-up',passport.priorLogin, user_profile.signup)
+
+
+
 router.post('/create', user_profile.create);
 
 // here we will be using passport middleware
