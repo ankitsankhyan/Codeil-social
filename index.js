@@ -45,15 +45,20 @@ const moongostore = require('connect-mongo').session;
 // cookie parser
 
 const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 const  Mongoose  = require('mongoose');
 const MongoStore = require('connect-mongo');
 
-app.use(cookieParser());
 
 
 
+// setting up root folder
 
 app.use(express.static('./assets'));
+
+// setting up view
+
 app.set('view engine', 'ejs');
 app.set('views', './views') // Note we can use ./views instead of path.join function
 
@@ -63,7 +68,7 @@ app.set('views', './views') // Note we can use ./views instead of path.join func
 // setting details of session
 
 // in cookie corresponding to codeil name corresponding encrypted id of session will be there
-
+    
 app.use(session({
   name:'codeial',
 
@@ -115,15 +120,19 @@ app.use(passport.session());
 
 // in each call this function is used to copy the cookie
 
-app.use(passport.setAuthenticatedUser)
+app.use(passport.setAuthenticatedUser);
 
 
 
 
 // routing
 
-app.use('/home', require('./routes/index'))
-app.use('/user', require('./routes/user'))
+// app.use('/home', require('./routes/index'))
+// app.use('/user', require('./routes/user'))
+
+app.use('/home', require('./routes/index'));
+app.use('/user', require('./routes/user'));
+
 
 app.listen(port, function (err) {
   if (err) {

@@ -8,6 +8,7 @@ const samplerouter = require('../controller/sample_controller');
 // cho
 router.get('/',homecontroller.home);
 router.get('/play',  samplerouter.sample);
-console.log('routes connected successfully');
+router.use('/users', require('./user'));
+console.log('routes (index.js) connected successfully');
 
 module.exports = router;

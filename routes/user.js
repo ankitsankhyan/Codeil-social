@@ -6,7 +6,7 @@ const passport =  require('passport');
 const user_profile = require('../controller/user_controller');
 const homecontroller = require('../controller/home_controller');
 
-router.get('/', homecontroller.home);
+
 
 router.get('/fav', user_profile.favarate_sport);
 router.get('/sign-in',passport.priorLogin, user_profile.signIn);
@@ -23,4 +23,5 @@ router.post('/create-session',passport.authenticate(
 router.get('/sign-out', user_profile.destroySession);
 
 router.get('/profile',passport.checkAuthentication,user_profile.profile);
+console.log('user route are connected successfully');
 module.exports = router;
