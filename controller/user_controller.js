@@ -7,24 +7,39 @@ const posts = require('../model/post');
 
 module.exports.profile = function(req, res){
     console.log(req.user, 'in profile');
-    posts.find({user: req.user._id}, function(err, post_user){
-        if(err){
-            console.log('error in finding posts');
-            return;
-        }
-     console.log(post_user[0], 'in find')
-        return res.render('user',{
-            title: 'Profile ',
-            user: req.user,
-            local: res.locals,
-            post: post_user
-        });
-    });
-    // return res.render('user', {
-    //     title: 'Profile',
-    //     user: req.user,
-    //     local: res.locals
+
+    // without prepopulate
+
+
+    // posts.find({user: req.user._id}, function(err, post_user){
+    //     if(err){
+    //         console.log('error in finding posts');
+    //         return;
+    //     }
+    //  console.log(post_user[0], 'in find')
+    //     return res.render('user',{
+    //         title: 'Profile ',
+    //         user: req.user,
+    //         local: res.locals,
+    //         post: post_user
+    //     });
     // });
+   
+    //  we will prefetch the data of user from data base whose id is given here
+
+    posts.find({user: req.user._id}).populate('user').exec(function(err,post_user){
+        if(err){
+                    console.log('error in finding posts');
+                    return;
+                }
+             console.log(post_user[0], 'in find')
+                return res.render('user',{
+                    title: 'Profile ',
+                    user: req.user,
+                    local: res.locals,
+                    post: post_user
+                });
+    })
 }
 
 module.exports.favarate_sport = function(req, res){
