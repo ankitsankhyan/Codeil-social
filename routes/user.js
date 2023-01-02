@@ -6,7 +6,7 @@ const passport =  require('passport');
 const user_profile = require('../controller/user_controller');
 const homecontroller = require('../controller/home_controller');
 
-
+router.get('/',passport.checkAuthentication, user_profile.profile);
 
 router.get('/fav', user_profile.favarate_sport);
 

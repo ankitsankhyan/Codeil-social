@@ -137,8 +137,8 @@ app.use(passport.setAuthenticatedUser);
 // app.use('/home', require('./routes/index'))
 // app.use('/user', require('./routes/user'))
 
-app.use('/home', require('./routes/index'));
-app.use('/user', require('./routes/user'));
+app.use('/', require('./routes'));
+// app.use('/user', require('./routes/user'));
 
 
 app.listen(port, function (err) {
