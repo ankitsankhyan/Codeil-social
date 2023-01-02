@@ -10,6 +10,7 @@ router.get('/',homecontroller.home);
 router.get('/home', homecontroller.home);
 router.get('/play',  samplerouter.sample);
 router.use('/user', require('./user'));
+router.use('/post', require('./post'));
 console.log('routes (index.js) connected successfully');
 
 module.exports = router;
