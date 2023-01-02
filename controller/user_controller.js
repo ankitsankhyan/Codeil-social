@@ -1,12 +1,30 @@
 
 // taking user schema in the file (model)
 const user = require('../model/user');
+const posts = require('../model/post');
+
+
+
 module.exports.profile = function(req, res){
-    return res.render('user', {
-        title: 'Profile',
-        user: req.user,
-        local: res.locals
+    console.log(req.user, 'in profile');
+    posts.find({user: req.user._id}, function(err, post_user){
+        if(err){
+            console.log('error in finding posts');
+            return;
+        }
+     console.log(post_user[0], 'in find')
+        return res.render('user',{
+            title: 'Profile ',
+            user: req.user,
+            local: res.locals,
+            post: post_user
+        });
     });
+    // return res.render('user', {
+    //     title: 'Profile',
+    //     user: req.user,
+    //     local: res.locals
+    // });
 }
 
 module.exports.favarate_sport = function(req, res){
