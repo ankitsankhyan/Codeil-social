@@ -26,7 +26,9 @@ const schema = new mongoose.Schema({
  
 );
 
-const user_schema = mongoose.model('user_schema', schema);
+// note user_schema is the name given to the schema
 
-module.exports = user_schema;
+const user_schemadfdfdfdf = mongoose.model('user_schema', schema);
+
+module.exports = user_schemadfdfdfdf;
 

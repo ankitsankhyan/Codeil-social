@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 
-
+console.log(mongoose, 'in Post');
 const postSchema = new mongoose.Schema({
     content:{
         type : String,
@@ -11,7 +11,12 @@ const postSchema = new mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'user_schema'
-            }},
+            },
+            // include array of id of comments to fetch them fast
+           comments: [{
+             type: mongoose.Schema.Types.ObjectId,
+             ref: 'Comment'
+           }]},
     {
         timestamps:true
     });
