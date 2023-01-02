@@ -69,6 +69,9 @@ passport.setAuthenticatedUser = function(req, res, next){
 
     next();
 }
+
+// this function is used if user is not login then user is send to signin otherwise profile page will be given
+
 passport.priorLogin = function(req, res, next){
     if(!req.isAuthenticated()){
         next();

@@ -8,6 +8,20 @@
         <button type="submit">Submit</button>
     </form>
 
+    <ul>
+        <% for(let i=0; i < post.length; i++){%>
+          <li>
+             <div><%= post[i].content %>
+            <p>
+              <%= post[i].user.name %>
+            </p></div> 
+    
+    
+              </li>
+              
+                  <%}%>
+      </ul>
+
 </section>
 
 
