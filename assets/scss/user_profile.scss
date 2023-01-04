@@ -3,7 +3,7 @@ body {
     margin: 0px;
     padding: 0px;
     text-align: center;
-    background-color: skyblue;
+    background-color: #ccffff;
 
     #profile_center {
         height: 100vh;
@@ -15,11 +15,17 @@ body {
             div {
                 padding: 10px;
                 border-radius: 10px;
-                background-color: cyan;
+                background-color:#4dd2ff;
                 margin: auto;
                 border-style: solid;
                 border-color: blue;
                 border-width: 1px;
+                font-size: larger;
+                font-family: sans-serif;
+
+                p{
+                    font-size: x-small;
+                }
             }
 
             width: 500px;

@@ -14,18 +14,15 @@ module.exports.home = function(req, res){
       path: 'user'
 
     }
-  }
-      
 
-  
-  )
-  exec(function(err,post_all){
-   
+    
+  }).exec(function(err,post_all){
     return  res.render('home', {
       title : 'Home',
       local: res.locals,
       post: post_all
     })
   })
+  
  
 }

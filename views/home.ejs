@@ -1,38 +1,61 @@
 <h1>
-    Codiel/ <%= title %>
+  Codiel/ <%= title %>
 </h1>
 
 <section>
-    <form action="/post/create" method="post">
-        <textarea name="content" id="" cols="50" rows="3" placeholder="Type here ...." required></textarea><br>
-        <button type="submit">Submit</button>
-    </form>
+  <form action="/post/create" method="post">
+    <textarea name="content" id="" cols="50" rows="3" placeholder="Type here ...." required></textarea><br>
+    <button type="submit">Submit</button>
+  </form>
 
-    <ul>
-        <% for(let i=0; i < post.length; i++){%>
-          <li>
-             <div><%= post[i].content %>
-           <br>
-              <small>
+  <ul>
+    <% for(let i=0; i < post.length; i++){%>
+      <li>
+
+
+        <div>
+          <%= post[i].content %>
+            <br>
+            <small>
               <%= post[i].user.name %>
-            </small></div> 
-    
-    
-              </li>
-            <div class="post-comments">
-              Add comment
-              <% if (locals.user) {%>
-                <form action="comments/create" method="post">
-                  <input type="text" name="content" placeholder="type here to add comment...."><br>
-                  <input type="hidden" name="post" value=<%= post[i].id %>    >
-                  <input type="submit" value="Add comment">
+            </small>
+            <% if( local.user && local.user.id==post[i].user.id){%>
+              <small>
+                <a href="/post/destroy/ <%= post[i].id %>">delete</a>
+              </small>
+              <%}%>
 
-                </form>
-                <%}%>
-            </div>
-                  <%}%>
-      </ul>
+        </div>
+
+
+      </li>
+      <div class="post-comments">
+        Add comment
+        <% if (local.user) {%>
+          <form action="comments/create" method="post">
+            <input type="text" name="content" placeholder="type here to add comment...."><br>
+            <input type="hidden" name="post" value=<%=post[i].id %> >
+            <input type="submit" value="Add comment">
+
+          </form>
+          <%}%>
+
+            <% for(comment of post[i].comments){%>
+              <div>
+                <%= comment.content %>
+              </div>
+              <small>
+                <%= comment.user.name %>
+              </small>
+              <% if(locals.user.id==comment.user.id){%>
+                <small>
+                  <button><a href="comments/destroy/<%=comment.id%>">X</a></button>
+                </small>
+                <% }%>
+
+                  <% }%>
+      </div>
+      <%}%>
+  </ul>
 
 </section>
-
-
