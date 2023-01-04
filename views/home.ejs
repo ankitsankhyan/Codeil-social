@@ -12,13 +12,24 @@
         <% for(let i=0; i < post.length; i++){%>
           <li>
              <div><%= post[i].content %>
-            <p>
+           <br>
+              <small>
               <%= post[i].user.name %>
-            </p></div> 
+            </small></div> 
     
     
               </li>
-              
+            <div class="post-comments">
+              Add comment
+              <% if (locals.user) {%>
+                <form action="comments/create" method="post">
+                  <input type="text" name="content" placeholder="type here to add comment...."><br>
+                  <input type="hidden" name="post" value=<%= post[i].id %>    >
+                  <input type="submit" value="Add comment">
+
+                </form>
+                <%}%>
+            </div>
                   <%}%>
       </ul>
 

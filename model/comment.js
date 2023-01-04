@@ -13,8 +13,11 @@ const commentSchema = new mongoose.Schema({
     post:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Post'
-    }
-})
+    }})
+    // this names collection too
+// }, {
+//     collection : "commnets_hai"
+// })
 
 const comment_12 = mongoose.model('Comment', commentSchema);
 module.exports = comment_12;

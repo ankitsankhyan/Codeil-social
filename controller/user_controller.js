@@ -6,7 +6,7 @@ const posts = require('../model/post');
 
 
 module.exports.profile = function(req, res){
-    console.log(req.user, 'in profile');
+   
 
     // without prepopulate
 
@@ -32,7 +32,7 @@ module.exports.profile = function(req, res){
                     console.log('error in finding posts');
                     return;
                 }
-             console.log(post_user[0], 'in find')
+         
                 return res.render('user',{
                     title: 'Profile ',
                     user: req.user,
@@ -62,7 +62,7 @@ module.exports.signIn = function(req,res){
 }
 
 module.exports.create = function(req, res){
-    console.log(req.body);
+   
    
 
     if(req.body.password != req.body.confirm_password){
@@ -73,7 +73,7 @@ module.exports.create = function(req, res){
             console.log('error in finding');
             return;
            }
-       console.log(User);
+      
         if(!User){
             user.create({
                 email: req.body.email,
@@ -108,4 +108,12 @@ module.exports.destroySession = function(req,res){
         if (err) { return next(err); }
         res.redirect('/home');
       });
+}
+
+module.exports.update = function(req, res){
+     if(req.body.password != req.user.password){
+        return res.redirect('/user/profile');
+     }
+
+     
 }

@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 
-console.log(mongoose, 'in Post');
+
 const postSchema = new mongoose.Schema({
     content:{
         type : String,

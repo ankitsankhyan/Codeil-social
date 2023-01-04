@@ -5,9 +5,22 @@ module.exports.home = function(req, res){
 
   // user here is your attribute which you are populate
 
+  // populating user attribute of post
+  post.find({}).populate('user').populate({
+    // populating comments attribute of post
+    path: 'comments',
+// this is nested populating in which user attribute of commnets value is populated
+    populate:{
+      path: 'user'
+
+    }
+  }
+      
+
   
-  post.find({}).populate('user').exec(function(err,post_all){
-    console.log(post_all);
+  )
+  exec(function(err,post_all){
+   
     return  res.render('home', {
       title : 'Home',
       local: res.locals,
