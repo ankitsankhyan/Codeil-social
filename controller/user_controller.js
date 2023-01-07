@@ -46,22 +46,24 @@ module.exports.profile = function(req, res){
    
 }
      
-   module.exports.random_id = function(req, res){
+   module.exports.random_id =async function(req, res){
 
-    user.findById(req.params.id, function(err, found_user){
-        if(err){
-          console.log('user not found');
-        }
+   var found_user = await user.findById(req.params.id);
+   
+   
+ 
 
-        posts.find({user: found_user.id},function(err, post_user){
-          return res.render('user',{
+    var post_user = await posts.find({user: found_user.id});
+        
+        
+    return res.render('user',{
               title: 'Profile ',
               user: found_user,
               local:res.locals,
               post: post_user
           });
-        })
-  })
+    
+  
    }
 
 module.exports.favarate_sport = function(req, res){
