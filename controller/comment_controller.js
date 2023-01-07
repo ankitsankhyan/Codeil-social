@@ -39,7 +39,7 @@ module.exports.create = function (req, res){
 module.exports.destroy = function(req,res){
     
     comment.findById(req.params.id, function(err, comment_found){
-        console.log(req.user);
+     
         if(comment_found.user == req.user.id){
         
             console.log(comment_found);

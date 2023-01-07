@@ -23,54 +23,55 @@ module.exports.create = function (req, res) {
 
 }
 
-module.exports.destroy = function (req, res) {
+// module.exports.destroy = function (req, res) {
 
-    // var id = new mongoose.Types.ObjectId(req.params.id);
-    console.log(req.params.id, 'in destroy');
-    Post.findById(req.params.id, function (err, post_found) {
+//     // var id = new mongoose.Types.ObjectId(req.params.id);
+   
+//     Post.findById(req.params.id, function (err, post_found) {
        
    
 
-        // req.user.id is string and req.user._id is object
+//         // req.user.id is string and req.user._id is object
         
         
-            if (post_found.user == req.user.id) {
-                post_found.remove();
-                // in param post id will be sent and here we are checking if that id is present in comment then that comment will be
-                Comment.deleteMany({ post: req.params.id }, function (err) {
-                    if (err) {
-                        console.log('error in finding comments related to posts');
-                        return res.redirect('back');
-                    }
-                    return res.redirect('back');
-                })
-            } else {
-                return res.redirect('back');
-            }
-        
-
-
-    })
-}
-
-
-// module.exports.destroy = function(req, res){
-//     Post.findById(req.params.id, function(err, post){
-//         // .id means converting the object id into string
-    
-//             if (post.user == req.user.id){
-//                 post.remove();
-    
-//                 Comment.deleteMany({post: req.params.id}, function(err){
+//             if (post_found.user == req.user.id) {
+//                 post_found.remove();
+//                 // in param post id will be sent and here we are checking if that id is present in comment then that comment will be
+//                 Comment.deleteMany({ post: req.params.id }, function (err) {
+//                     if (err) {
+//                         console.log('error in finding comments related to posts');
+//                         return res.redirect('back');
+//                     }
 //                     return res.redirect('back');
-//                 });
-//             }else{
+//                 })
+//             } else {
 //                 return res.redirect('back');
 //             }
+        
+
+
+//     })
+// }
+
+
+module.exports.destroy = function(req, res){
+    console.log(req.params.id, 'in post destroy function');
+    Post.findById(req.params.id, function(err, post){
+        // .id means converting the object id into string
+    console.log(post);
+            if (post.user == req.user.id){
+                post.remove();
+    
+                Comment.deleteMany({post: req.params.id}, function(err){
+                    return res.redirect('back');
+                });
+            }else{
+                return res.redirect('back');
+            }
      
       
 
-//     });
-// }
+    });
+}
 
 
