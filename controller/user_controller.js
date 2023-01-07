@@ -26,7 +26,7 @@ module.exports.profile = function(req, res){
     // });
    
     //  we will prefetch the data of user from data base whose id is given here
-
+if(req.params.id == undefined){
     posts.find({user: req.user._id}).populate('user').exec(function(err,post_user){
         if(err){
                     console.log('error in finding posts');
@@ -40,6 +40,23 @@ module.exports.profile = function(req, res){
                     post: post_user
                 });
     })
+}else{
+    user.findById(req.params.id, function(err, found_user){
+          if(err){
+            console.log('user not found');
+          }
+
+          posts.find({user: found_user.id},function(err, post_user){
+            return res.render('user',{
+                title: 'Profile ',
+                user: found_user,
+                local:null,
+                post: post_user
+            });
+          })
+    })
+}
+   
 }
 
 module.exports.favarate_sport = function(req, res){

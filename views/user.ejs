@@ -21,7 +21,10 @@
           
               <%}%>
   </ul>
-         <a href="/"><button>New Post</button></a>
+  if(local.user){
+    <a href="/"><button>New Post</button></a>
+  }
+       
   </div>
 
  
