@@ -133,10 +133,15 @@ module.exports.destroySession = function(req,res){
 }
 
 module.exports.update = function(req, res){
-     if(req.body.password != req.user.password){
-        return res.redirect('/user/profile');
-
+     if(req.user.id != req.params.id){
+        return res.status(401).send('unauthorised');
+        // this will print that this attempt was an unauthorise attempt to change
      }
 
+     user.findByIdAndUpdate(req.params.id , req.body, function(err, update_user){
+        console.log(update_user);
+        return res.redirect('back');
+     });
+      
      
 }
