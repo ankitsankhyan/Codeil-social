@@ -8,6 +8,7 @@
     <h1>Name : <%= user.name %></h1>
     <h1>Email : <%= user.email%></h1>
     <h1>posts</h1>
+    
   <ul>
     <% for(let i=0; i < post.length; i++){%>
       <li>
@@ -21,13 +22,24 @@
           
               <%}%>
   </ul>
-  if(local.user){
-    <a href="/"><button>New Post</button></a>
-  }
-       
+
+    <a href="/"><button>New Post</button></a><br>
+
+       <% if(user.id == local.user.id){%>
+      <h1> Update Credentials</h1>
+<!-- if user matches then show the form -->
+      <form action="">
+        <input type="text">
+        <input type="text">
+        <input type="submit">
+            </form>
+       <%}else{%> 
+        
+        <%}%>
   </div>
 
- 
+  
+
 
  <!-- can't print data if written here doubt i have -->
  

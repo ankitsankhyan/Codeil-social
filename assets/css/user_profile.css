@@ -1,6 +1,6 @@
 body { margin: 0px; padding: 0px; text-align: center; background-color: #ccffff; }
 
-body #profile_center { height: 100vh; }
+body #profile_center { min-height: 100vh; }
 
 body #profile_center ul li { list-style-type: none; margin: auto; width: 500px; }
 

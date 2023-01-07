@@ -1,4 +1,5 @@
 const post = require('../model/post');
+const user = require('../model/user');
 module.exports.home = function(req, res){
   console.log(res.locals, 'in home');
 
@@ -17,11 +18,16 @@ module.exports.home = function(req, res){
 
     
   }).exec(function(err,post_all){
-    return  res.render('home', {
-      title : 'Home',
-      local: res.locals,
-      post: post_all
+
+    user.find({}, function(err,friend){
+      return  res.render('home', {
+        title : 'Home',
+        local: res.locals,
+        post: post_all,
+        friends : friend
+      })
     })
+   
   })
   
  

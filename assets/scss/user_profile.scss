@@ -6,8 +6,7 @@ body {
     background-color: #ccffff;
 
     #profile_center {
-        height: 100vh;
-
+        min-height: 100vh;
         ul li {
             list-style-type: none;
             margin: auto;

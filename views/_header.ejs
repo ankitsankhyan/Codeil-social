@@ -7,7 +7,8 @@
    
    
    <div id = "buttons">
-      <% if(local.user) {%>
+     
+      <% if(local.user)  {%>
          <!-- don't need to write http  as shown-->
        <!-- <button><a href="//http://localhost:8000/user/sign-out">Sign-out</a></button>   -->
        <button><a href="/user/profile"><%= local.user.name %> </a></button>

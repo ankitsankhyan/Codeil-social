@@ -28,5 +28,6 @@ router.post('/create-session',passport.authenticate(
 router.get('/sign-out', user_profile.destroySession);
 
 router.get('/profile',passport.checkAuthentication,user_profile.profile);
+router.get('/profile/:id',passport.checkAuthentication,user_profile.random_id);
 console.log('user route are connected successfully');
 module.exports = router;
