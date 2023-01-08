@@ -102,13 +102,22 @@ module.exports.createSession = function (req, res) {
     return res.redirect('/user/profile');
 }
 
-module.exports.destroySession =  function (req, res) {
+module.exports.destroySession =   function (req, res) {
 //    created an object flash in request anc corresponding key value
-   req.logout(function(err){
-    return res.redirect('back');
-   });
+//   due to version change in express 0.4.0 to 0.6.0 we have to pass callback function
+   req.logout(function(err) {
+    if(err){
+        console.log(err);
+    }
+    res.redirect('/');
+  });
+
+
   
-}
+    
+ 
+  }
+
 
 module.exports.update = function (req, res) {
     if (req.user.id != req.params.id) {
@@ -120,6 +129,4 @@ module.exports.update = function (req, res) {
         console.log(update_user);
         return res.redirect('back');
     });
-
-
 }
