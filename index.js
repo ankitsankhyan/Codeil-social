@@ -1,6 +1,7 @@
 const express = require('express');
 const expressEjsLayouts = require('express-ejs-layouts');
-
+const flash = require('connect-flash');
+const customMware = require('./config/middleware')
 const port = 8000;
 const app = express();
 // 
@@ -128,8 +129,10 @@ app.use(passport.session());
 // in each call this function is used to copy the cookie
 
 app.use(passport.setAuthenticatedUser);
+// call this flash function otherwise you will be stuck
+app.use(flash());
 
-
+app.use(customMware.setFlash);
 
 
 // routing

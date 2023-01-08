@@ -9,7 +9,8 @@ module.exports.profile = async function (req, res) {
 
     try {
         var post_user = await posts.find({ user: req.user._id }).populate('user');
-        return res.render('user', {
+       
+                return res.render('user', {
             title: 'Profile ',
             user: req.user,
             local: res.locals,
@@ -22,7 +23,7 @@ module.exports.profile = async function (req, res) {
 }
 
 module.exports.random_id = async function (req, res) {
-
+try{
     var found_user = await user.findById(req.params.id);
     var post_user = await posts.find({ user: found_user.id });
     return res.render('user', {
@@ -32,6 +33,10 @@ module.exports.random_id = async function (req, res) {
         post: post_user
     });
 
+}catch(err){
+    console.log(err);
+}
+  
 
 }
 
@@ -61,41 +66,48 @@ module.exports.create = async function (req, res) {
     if (req.body.password != req.body.confirm_password) {
         return res.redirect('back');
     }
-    var User = await user.findOne({ email: req.body.email });
-    console.log(User);
-    if (!User) {
-
-        // if user does not exist then create user
-
-        var created_user = await user.create({
-            email: req.body.email,
-            password: req.body.password,
-            name: req.body.name,
-        });
-
-        return res.redirect('/user/sign-in');
-
-    } else {
-
-        console.log('user exists already');
-        return res.redirect('/home');
-
+    try{
+        var User = await user.findOne({ email: req.body.email });
+        console.log(User);
+        if (!User) {
+    
+            // if user does not exist then create user
+    
+            var created_user = await user.create({
+                email: req.body.email,
+                password: req.body.password,
+                name: req.body.name,
+            });
+    
+            return res.redirect('/user/sign-in');
+    
+        } else {
+    
+            console.log('user exists already');
+            return res.redirect('/home');
+    
+        }
+    
+    }catch(err){
+        console.log(err);
     }
-
+  
 
 }
 
 
 module.exports.createSession = function (req, res) {
-    // to do later
+   req.flash('success', 'You are logged in');
+  
     return res.redirect('/user/profile');
 }
 
-module.exports.destroySession = function (req, res) {
-    req.logout(function (err) {
-        if (err) { return next(err); }
-        res.redirect('/home');
-    });
+module.exports.destroySession =  function (req, res) {
+//    created an object flash in request anc corresponding key value
+   req.logout(function(err){
+    return res.redirect('back');
+   });
+  
 }
 
 module.exports.update = function (req, res) {

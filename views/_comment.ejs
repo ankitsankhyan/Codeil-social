@@ -1,13 +1,16 @@
-<div>
-    <%= comment.content %>
-  </div>
-  <small>
-    <%= comment.user.name %>
-  </small>
-  <% if(locals.user.id==comment.user.id){%>
-    <small>
-      <button><a href="comments/destroy/<%=comment.id%>">X</a></button>
-    </small>
-    <% }%>
 
+   
+      <div><%= comment.content %></div>  
+      <% if (local.user && local.user.id == comment.user.id){ %>
+        <small>
+            <a href="/comments/destroy/<%= comment.id %>">X</a>
+        </small>
+        <% } %>
+        
+      <small><%= comment.user.name %></small>   
+         <br>
+      <%}%>
+  
+
+     
     <!-- has been used in post in which each post comment are displayed using above function -->

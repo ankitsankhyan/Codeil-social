@@ -30,10 +30,20 @@
         </form>
         <%}%>
 <!-- previous comments -->
-          <% for(comment of post[i].comments){%>
-           <%- include('_comment')%>
-
-                <% }%>
-    </div>
+     
+       <% for(comment of post[i].comments){%>
+     
+       <div><%= comment.content %></div>  
+        <% if (local.user && local.user.id == comment.user.id){ %>
+          <small>
+              <a href="/comments/destroy/<%= comment.id %>">X</a>
+          </small>
+          <% } %>
+          
+        <small><%= comment.user.name %></small>   
+           <br>
+        <%}%>
+     
     <%}%>
+   
 </ul>

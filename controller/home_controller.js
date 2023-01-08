@@ -18,7 +18,7 @@ module.exports.home = function(req, res){
 
     
   }).exec(function(err,post_all){
-
+    console.log(res.locals.user, 'is returned');
     user.find({}, function(err,friend){
       return  res.render('home', {
         title : 'Home',

@@ -12,7 +12,10 @@
 </head>
 <body>
     <%- include('_header')%>
-
+ <% if(flash.success && flash.success.length > 0){%>
+  <h2><%= flash.success  %> as <%=local.user.name%></h2>
+ <%}%>
+ 
     <%-body%>
 
     <%- include('_footer') %>

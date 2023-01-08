@@ -7,7 +7,7 @@ const samplerouter = require('../controller/sample_controller');
 
 // cho
 router.use('/comments', require('./comments'));
-router.get('/',homecontroller.home);
+router.get('/', homecontroller.home);
 router.get('/home', homecontroller.home);
 router.get('/play',  samplerouter.sample);
 router.use('/user', require('./user'));
