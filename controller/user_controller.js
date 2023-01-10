@@ -105,10 +105,13 @@ module.exports.createSession = function (req, res) {
 module.exports.destroySession =   function (req, res) {
 //    created an object flash in request anc corresponding key value
 //   due to version change in express 0.4.0 to 0.6.0 we have to pass callback function
+
    req.logout(function(err) {
     if(err){
         console.log(err);
     }
+    // note req.flash must be called after calling logout function
+    req.flash('success','You are logged out');
     res.redirect('/');
   });
 
