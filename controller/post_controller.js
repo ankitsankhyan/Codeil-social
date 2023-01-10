@@ -6,17 +6,31 @@ const Post = require('../model/post');
 const Comment = require('../model/comment');
 
 module.exports.create = async function (req, res) {
+    console.log(req.body );
+    
     if (!req.isAuthenticated()) {
         res.redirect('/user/sign-in');
 
     }
-
+  console.log('reached');
     try {
-        var post = await Post.create({
+        var post_created = await Post.create({
             content: req.body.content,
             user: req.user._id
         })
-        req.flash('success', 'Post created successfully');
+        // checking if xml http req is there or not
+        if(req.xhr){
+            req.flash('success', 'Post created successfully');
+            return res.status(200).json({
+                data:{
+                    post:post_created
+                    // we try to return a message
+                },
+                message:'post is created!'
+
+            });
+        }
+       
         return res.redirect('back');
     } catch (err) {
         console.log(err);
@@ -38,6 +52,15 @@ module.exports.destroy = async function (req, res) {
         post.remove();
 
         await Comment.deleteMany({ post: req.params.id });
+
+        if(req.xhr){
+            return res.status(200).json({
+              data:{
+                post_id : req.params.id
+              } ,
+              message:'post deleted' 
+            });
+        }
         req.flash('success', 'Post deleted Successfully');
         return res.redirect('back');
 

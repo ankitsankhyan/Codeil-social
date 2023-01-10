@@ -10,7 +10,7 @@
           </small>
           <% if( local.user && local.user.id==post[i].user.id){%>
             <small>
-              <a href="/post/destroy/<%= post[i].id %>">delete</a>
+              <a href="/post/destroy/<%= post[i].id %>" id="delete_post">delete</a>
             </small>
             <%}%>
 
