@@ -9,19 +9,7 @@
     <h1>Email : <%= user.email%></h1>
     <h1>posts</h1>
     
-  <ul>
-    <% for(let i=0; i < post.length; i++){%>
-      <li>
-         <div><%= post[i].content %>
-        <p>
-          <%= post[i].user.name %>
-        </p></div> 
 
-
-          </li>
-          
-              <%}%>
-  </ul>
 
     <a href="/"><button>New Post</button></a><br>
 
@@ -36,10 +24,26 @@
         <!--  value attribute means to put inside the box  -->
             </form>
        <%}%>
+
+
+
+       <ul>
+        <% for(let i=0; i < post.length; i++){%>
+          <li>
+             <div><%= post[i].content %>
+            <p>
+              <%= post[i].user.name %>
+            </p></div> 
+    
+    
+              </li>
+              
+                  <%}%>
+      </ul>
+    
   </div>
 
-  
-
+ 
 
  <!-- can't print data if written here doubt i have -->
  

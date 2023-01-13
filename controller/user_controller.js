@@ -8,7 +8,7 @@ const posts = require('../model/post');
 module.exports.profile = async function (req, res) {
 
     try {
-        var post_user = await posts.find({ user: req.user._id }).populate('user');
+        var post_user = await posts.find({ user: req.user._id }).populate('user').sort('-createdAt');;
        
                 return res.render('user', {
             title: 'Profile ',

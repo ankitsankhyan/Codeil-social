@@ -13,10 +13,19 @@
         data: newPostform.serialize(),// data will be serialized
         success: function (data) {
           var c = newpostDom(data.data.post);
-          console.log(c);
+           console.log(data);
           $(' ul').prepend(c);
-
+        
           // deletepost($(' .delete-post-button', c));
+          
+          new Noty({
+            theme: 'relax',
+            text: "Post published!",
+            type: 'success',
+            layout: 'topRight',
+            timeout: 1500
+            
+        }).show();
         },
         error: function (error) {
           console.log(error.responseText);
@@ -36,9 +45,7 @@
         <div>
           ${post.content}
             <br>
-            <small>
-              ${post.user}
-            </small>
+          
           
               <small>
                 <a href="/post/destroy/${post.id} ">delete</a>
@@ -81,7 +88,16 @@ var json_data;
           json_data = data;
          console.log(data, 'data is present');
          $(`#${data.data.post_id}`).remove();
-         alert('deleted');
+         
+         new Noty({
+          theme: 'relax',
+          text: "Post Deleted!",
+          type: 'success',
+          layout: 'topRight',
+          timeout: 1500
+          
+      }).show();
+
         }, error: function (error) {
           console.log(error.responseText);
         }

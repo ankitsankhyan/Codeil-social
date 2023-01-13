@@ -20,19 +20,22 @@ module.exports.create = async function (req, res) {
         })
         // checking if xml http req is there or not
        
+      //  req.flash('success', 'Post is created');
+        //  console.log(req.flash);
         if(req.xhr){
             // req.flash('success', 'Post created successfully');
-            console.log('yooooooooooooooooooooooo');
+           
             return res.status(200).json({
                 data:{
-                    post:post_created
+                    post:post_created,
+                    
                     // we try to return a message
                 },
                 message:'post is created!'
 
             });
         }
-        req.flash('success', 'Post created successfully');
+       
         return res.redirect('back');
     } catch (err) {
         console.log(err);
