@@ -1,5 +1,5 @@
 <% for(let i=0; i < post.length; i++){%>
-    <li>
+    <li id="<%= post[i].id%>">
 
 
       <div>
@@ -10,15 +10,15 @@
           </small>
           <% if( local.user && local.user.id==post[i].user.id){%>
             <small>
-              <a href="/post/destroy/<%= post[i].id %>" id="delete_post">delete</a>
+              <a href="/post/destroy/<%= post[i].id%>" class="delete_post" >delete</a>
             </small>
             <%}%>
 
       </div>
 
 
-    </li>
-        <div class="post-comments">
+    
+        <div class="post-comments"  id="<%= post[i].id%>">
       Add comment
       <!-- form for adding commnent  -->
       <% if (local.user) {%>
@@ -46,4 +46,5 @@
      
     <%}%>
    
-</ul>
+        </li>
+        <br>

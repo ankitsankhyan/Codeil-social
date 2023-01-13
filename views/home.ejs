@@ -9,14 +9,14 @@
   </form>
 
   <ul>
-    <%- include('_post') %>
-
+    <%- include('_post.ejs') %>
+</ul>
 </section>
 
 <section>
   <h3>Users</h3>
   <%for(f of friends){%>
-   <a href="//localhost:8000/user/profile/<%= f.id %>"><%= f.name%></a>
+   <a href="//localhost:8000/user/profile/<%= f.id %>"><%= f.name %></a>
   <%}%>
 </section>
 

@@ -1,35 +1,36 @@
 
 {
-    
-    let createPost = function(){
-       let newPostform = $('#new-post-form');
-      
-       newPostform.submit(function(e){
-           e.preventDefault();
-// note .submit is activated when we have clicked only
-           $.ajax({
-            type : 'post',
-            url : '/post/create',
-            data: newPostform.serialize(),// data will be serialized
-            success : function(data){
-              var c =  newpostDom(data.data.post);
-              console.log(c);
-              $(' ul').prepend(c);
-              deletepost($(' .delete-post-button', c));
-            },
-             error: function(error){
-                console.log(error.responseText);
-             }
-    
-           }
-           
-           )
-       })
 
-      
-    }
-    let newpostDom = function(post){
-        return $(`<li>
+  let createPost = function () {
+    let newPostform = $('#new-post-form');
+
+    newPostform.submit(function (e) {
+      e.preventDefault();
+      // note .submit is activated when we have clicked only
+      $.ajax({
+        type: 'post',
+        url: '/post/create',
+        data: newPostform.serialize(),// data will be serialized
+        success: function (data) {
+          var c = newpostDom(data.data.post);
+          console.log(c);
+          $(' ul').prepend(c);
+
+          // deletepost($(' .delete-post-button', c));
+        },
+        error: function (error) {
+          console.log(error.responseText);
+        }
+
+      }
+
+      )
+    })
+
+
+  }
+  let newpostDom = function (post) {
+    return $(`<li>
 
 
         <div>
@@ -60,34 +61,43 @@
         </form>
       `)
     // return $('<h1> added </h1>');
-    }
+  }
+
+  var anchor = $('.delete_post');
 
 
 
-// deleting a post
-   
-let deletepost = function(deletelink){
-  $(deletelink).click(function(e){
-    e.preventDefault();
-  });
+
+  // deleting a post
+var json_data;
+  let deletepost = function (deletelink) {
+    $(deletelink).click(function (e) {
+      e.preventDefault();
+
+      $.ajax({
+        type: 'get',
+        url: $(deletelink).prop('href'),
+        success: function (data) {
+          json_data = data;
+         console.log(data, 'data is present');
+         $(`#${data.data.post_id}`).remove();
+         alert('deleted');
+        }, error: function (error) {
+          console.log(error.responseText);
+        }
+      })
+    });
+
+  }
 
 
-  $.ajax({
-    type:'get',
-    url: $(deletelink).prop('href'),
-    success:function(data){
-   $(`#post-${data.data.post._id}`).remove();
-    },error: function(error){
-        console.log(error.responseText);
-    }
-  })
 
-  
-}
+  for (let i = 0; i < anchor.length; i++) {
+    deletepost(anchor[i]);
+  }
+
+  createPost();
+  // deleting comments
 
 
-    createPost();
-    // deleting comments
-
-   
 }
