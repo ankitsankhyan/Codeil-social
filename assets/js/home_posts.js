@@ -1,6 +1,6 @@
 
 {
-
+var temp ;
   let createPost = function () {
     let newPostform = $('#new-post-form');
 
@@ -12,6 +12,8 @@
         url: '/post/create',
         data: newPostform.serialize(),// data will be serialized
         success: function (data) {
+          console.log(data.data.post);
+          temp = data.data.post;
           var c = newpostDom(data.data.post);
            console.log(data);
           $(' ul').prepend(c);
@@ -39,7 +41,7 @@
 
   }
   let newpostDom = function (post) {
-    return $(`<li>
+    return $(`<li  id = "${post._id}">
 
 
         <div>
@@ -48,24 +50,25 @@
           
           
               <small>
-                <a href="/post/destroy/${post.id} ">delete</a>
+                <a href="/post/destroy/${post._id}" class="delete_post">delete</a>
               </small>
             
   
         </div>
   
   
-      </li>
+     <br>
       <div class="post-comments">
       Add comment
       <!-- form for adding commnent  -->
    
         <form action="comments/create" method="post">
           <input type="text" name="content" placeholder="type here to add comment...."><br>
-          <input type="hidden" name="post" value= ${post.id}  >
+          <input type="hidden" name="post" value= ${post._id}  >
           <input type="submit" value="Add comment">
 
         </form>
+        </li>
       `)
     // return $('<h1> added </h1>');
   }

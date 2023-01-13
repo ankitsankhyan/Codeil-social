@@ -9,7 +9,7 @@ module.exports.home = async function (req, res) {
   // populating user attribute of post
 
   try{
-    req.flash('success','Welcome to home');
+   
     var post_all = await post.find({})
     .populate('user')
     .populate({

@@ -1,23 +1,26 @@
+<link rel="stylesheet" href="css/home.ejs">
 <h1>
   Codiel/ <%= title %>
 </h1>
-
-<section>
-  <form action="/post/create" method="post" id="new-post-form">
-    <textarea name="content" id="" cols="50" rows="3" placeholder="Type here ...." required></textarea><br>
-    <button type="submit">Submit</button>
-  </form>
-
-  <ul>
-    <%- include('_post.ejs') %>
-</ul>
-</section>
-
-<section>
-  <h3>Users</h3>
-  <%for(f of friends){%>
-   <a href="//localhost:8000/user/profile/<%= f.id %>"><%= f.name %></a>
-  <%}%>
-</section>
+<div>
+  <section>
+    <form action="/post/create" method="post" id="new-post-form">
+      <textarea name="content" id="" cols="50" rows="3" placeholder="Type here ...." required></textarea><br>
+      <button type="submit">Submit</button>
+    </form>
+  
+    <ul>
+      <%- include('_post.ejs') %>
+  </ul>
+  </section>
+  
+  <section>
+    <h3>Users</h3>
+    <%for(f of friends){%>
+     <a href="//localhost:8000/user/profile/<%= f.id %>"><%= f.name %></a>
+    <%}%>
+  </section>
+  
+</div>
 
 <script src="./js/home_posts.js"></script>
