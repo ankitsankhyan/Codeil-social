@@ -122,14 +122,31 @@ module.exports.destroySession =   function (req, res) {
   }
 
 
-module.exports.update = function (req, res) {
+module.exports.update = async function (req, res) {
     if (req.user.id != req.params.id) {
         return res.status(401).send('unauthorised');
         // this will print that this attempt was an unauthorise attempt to change
     }
 
-    user.findByIdAndUpdate(req.params.id, req.body, function (err, update_user) {
-        console.log(update_user);
+    // user.findByIdAndUpdate(req.params.id, req.body, function (err, update_user) {
+    //     console.log(update_user);
+    //     return res.redirect('back');
+    // });
+
+    var user_found =await user.findById(req.params.id);
+    console.log(user.uploadedAvatar, 'avatar function');
+    user.uploadedAvatar(req, res, function(err){
+      if(err){
+        console.log('error ', err);
+      }
+
+      user_found.name = req.body.name;
+      user_found.email = req.body.email;
+          console.log(req.file);
+      if(req.file){
+        user_found.avatar = user.avatarPath+'/' + req.file.filename;
+      }
+        user_found.save();
         return res.redirect('back');
-    });
+    })
 }
