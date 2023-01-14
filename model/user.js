@@ -45,12 +45,12 @@ let storage = multer.diskStorage({
   }
 })
 
-// static methods will make publically available
+// static methods will make publically available in each file
 
 
 // this line binds multer to storage where data will be stored
 
-// .single is intergrating attribute which is going to have multimedia file but only on photo
+// .single is intergrating attribute which is going to have multimedia file but only on
 schema.statics.uploadedAvatar = multer({storage: storage}).single('avatar');
 schema.statics.avatarPath = AVATAR_PATH;
 

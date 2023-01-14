@@ -63,6 +63,11 @@ const MongoStore = require('connect-mongo');
 
 app.use(express.static('./assets'));
 
+// this make this path available to browser to use
+// note complete path is to be given here otherwise will not work i.e __dirname + '/uploads'
+app.use('/uploads',express.static(__dirname +'/uploads'));
+
+
 // setting up view
 
 app.set('view engine', 'ejs');
