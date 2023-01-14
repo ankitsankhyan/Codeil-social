@@ -134,7 +134,8 @@ module.exports.update = async function (req, res) {
     // });
 
     var user_found = await user.findById(req.params.id);
-    console.log(user.uploadedAvatar, 'avatar function');
+    
+    console.log(req.file,' outside ');
     user.uploadedAvatar(req, res, function (err) {
         if (err) {
             console.log('error ', err);
