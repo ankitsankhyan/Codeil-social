@@ -119,4 +119,8 @@ var json_data;
   // deleting comments
 
 
+  var image = document.getElementById('upload-file');
+  console.log('hello');
+  alert('hello');
+
 }

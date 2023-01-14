@@ -18,13 +18,15 @@
         <input type="text" name="name" placeholder="Your name" value="<%= user.name%>" required>
 
         <input type="email" name="email" placeholder="Your Email" value="<%= user.email%>" required>
-        <input type="file"  name="avatar" placeholder="profile picture">
+        <input type="file"  name="avatar" placeholder="profile picture" id = "upload_file" onchange="getimagepreview(event)">
         <input type="submit" value="update">
         <!--  value attribute means to put inside the box  -->
             </form>
        <%}%>
 
+      <div id="preview" style=" height: 100px;">
 
+      </div>
 
        <ul>
         <% for(let i=0; i < post.length; i++){%>
@@ -43,6 +45,31 @@
   </div>
 
  
+<script>
+   function getimagepreview(event){
+        // this creates url from createObjectURL
+        alert('running');
+            var image = URL.createObjectURL(event.target.files[0]);
+           var newimg = document.createElement('img');
+            var preview = document.getElementById('preview');
+            var temp = document.getElementsByClassName('new-img');
+            if(temp.length != 0){
+                console.log(temp);
+                temp[0].remove();
+            }
+         
+          
+            newimg.style.width = '100px';
+            newimg.style.height = '100px';
+            newimg.classList.add('new-img');
+            newimg.src = image;
+            var caption = document.createElement('h4');
+            caption.style.innerText = 'Preview image';
+            preview.append(newimg);
+            preview.append(caption);
+            }
+</script>
+  
 
  <!-- can't print data if written here doubt i have -->
  
