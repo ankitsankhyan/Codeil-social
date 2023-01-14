@@ -16,10 +16,11 @@
        <% if(user.id == local.user.id){%>
       <h1> Update Credentials</h1>
 <!-- if user matches then show the form -->
-      <form action="//localhost:8000/user/update/<%= user.id %>" method="post">
+      <form action="//localhost:8000/user/update/<%= user.id %>" method="post" enctype="multipart/form-data">
         <input type="text" name="name" placeholder="Your name" value="<%= user.name%>" required>
 
         <input type="email" name="email" placeholder="Your Email" value="<%= user.email%>" required>
+        <input type="file"  name="avatar" placeholder="profile picture">
         <input type="submit" value="update">
         <!--  value attribute means to put inside the box  -->
             </form>
