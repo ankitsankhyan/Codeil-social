@@ -6,22 +6,40 @@ const Post = require('../model/post');
 const Comment = require('../model/comment');
 
 module.exports.create = async function (req, res) {
-    console.log(req.body );
-    
+    console.log(req.body , 'printing body');
+    console.log(req.file, 'file is printed')
     if (!req.isAuthenticated()) {
         res.redirect('/user/sign-in');
 
     }
-  console.log('reached');
+ 
     try {
-        var post_created = await Post.create({
-            content: req.body.content,
-            user: req.user._id
-        })
+      var post_created = null;
+      
+    
+      await  Post.uploadedImage(req, res,async function(err){
+        
+        if(err){
+          console.log('error in uploaded image');
+        }
+
+         post_created = await Post.create({
+          content: req.body.content,
+          user: req.user._id,
+          
+      })
+     
+      })
+
+      
+
+      
+      
         // checking if xml http req is there or not
        
       //  req.flash('success', 'Post is created');
         //  console.log(req.flash);
+        console.log(post_created);
         if(req.xhr){
             // req.flash('success', 'Post created successfully');
            

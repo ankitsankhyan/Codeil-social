@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
+// this is the path which is till the folder where we need to upload
 const AVATAR_PATH = path.join('/uploads/users/avatar');
 const schema = new mongoose.Schema({
     email:{
