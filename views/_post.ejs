@@ -20,9 +20,10 @@
 <br>
     
         <div class="post-comments"  id="<%= post[i].id%>">
-      Add comment
+    
       <!-- form for adding commnent  -->
       <% if (local.user) {%>
+        Add comment
         <form action="comments/create" method="post">
           <input type="text" name="content" placeholder="type here to add comment...."><br>
           <input type="hidden" name="post" value=<%=post[i].id %> >
@@ -31,7 +32,7 @@
         </form>
         <%}%>
 <!-- previous comments -->
-     
+        Comments
        <% for(comment of post[i].comments){%>
      
        <div><%= comment.content %></div>  

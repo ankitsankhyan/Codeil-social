@@ -32,13 +32,14 @@ const postSchema = new mongoose.Schema({
         cb(null, path.join(__dirname, '..', Image_path ));
     },
     filename : function(req, file, cb){
-        const uniqueSuffix = Date.now()+'-'+ Math.round(Math.random() * 1E9);
-        cb(null, file.fieldname + '-' +uniqueSuffix);
+        // const uniqueSuffix = Date.now()+'-'+ Math.round(Math.random() * 1E9);
+
+        cb(null, file.fieldname + '-' + Date.now());
     }
    })
 
 
-   postSchema.statics.uploadedImage = multer({storage1: storage}).single('images');
+   postSchema.statics.uploadedImage = multer({storage: storage}).single('images');
    postSchema.statics.ImagePath = Image_path;
 
     const  Post = mongoose.model('Post', postSchema);

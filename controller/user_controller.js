@@ -60,7 +60,7 @@ module.exports.signIn = function (req, res) {
 }
 
 module.exports.create = async function (req, res) {
-
+  
 
 
     if (req.body.password != req.body.confirm_password) {
@@ -70,15 +70,19 @@ module.exports.create = async function (req, res) {
         var User = await user.findOne({ email: req.body.email });
         console.log(User);
         if (!User) {
-
+        var created_user;
             // if user does not exist then create user
-
-            var created_user = await user.create({
+       await user.uploadedAvatar(req, res,async function(){
+            created_user = await user.create({
                 email: req.body.email,
                 password: req.body.password,
                 name: req.body.name,
+                avatar: user.avatarPath + '/' + req.file.filename
+                
             });
-
+        })
+           
+           console.log(created_user,'new created user');
             return res.redirect('/user/sign-in');
 
         } else {

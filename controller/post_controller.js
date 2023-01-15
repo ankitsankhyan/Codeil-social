@@ -6,8 +6,7 @@ const Post = require('../model/post');
 const Comment = require('../model/comment');
 
 module.exports.create = async function (req, res) {
-    console.log(req.body , 'printing body');
-    console.log(req.file, 'file is printed')
+   console.log(req.body);
     if (!req.isAuthenticated()) {
         res.redirect('/user/sign-in');
 
@@ -18,14 +17,14 @@ module.exports.create = async function (req, res) {
       
     
       await  Post.uploadedImage(req, res,async function(err){
-        
+        console.log(req.file, 'in post upload image');
         if(err){
           console.log('error in uploaded image');
         }
-
+        
          post_created = await Post.create({
           content: req.body.content,
-          user: req.user._id,
+          user: req.user.id,
           
       })
      
