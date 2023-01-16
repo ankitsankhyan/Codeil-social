@@ -6,6 +6,7 @@ const localstratagy = require('passport-local').Strategy;
 
 passport.use(new localstratagy({
     usernameField: 'email',
+    // this enables us  add req in following function so that we can add any text using flash
     passReqToCallback:true
 },  function(req,email, password, done){
     User.findOne({email : email}, function(err, user){
@@ -24,14 +25,15 @@ passport.use(new localstratagy({
     });
 }))
 
-// put user id in cookie in encrypted manner
+// put user id in cookie in encrypted manner in req.user
 
 passport.serializeUser(function(user,done){
     done(null, user.id);
 })
  
 
-// deserializeUser takes id as input and find corresponding user which is passed in request
+// deserializeUser takes id as input and find corresponding user which is passed in request 
+// when req to browser then deserialiser will take that and return complete user in req.user
 
 passport.deserializeUser(function(id, done){
     User.findById(id, function(err, user){

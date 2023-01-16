@@ -166,5 +166,5 @@ module.exports.update = async function (req, res) {
         }
         user_found.save();
         return res.redirect('back');
-    })
+    }) 
 }

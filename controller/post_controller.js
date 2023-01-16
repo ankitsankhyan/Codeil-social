@@ -29,6 +29,7 @@ module.exports.create = async function (req, res) {
       })
      
       })
+//
 
       
 
@@ -70,7 +71,7 @@ module.exports.destroy = async function (req, res) {
 
    console.log(req.user.id , 'destroy of post controller');
     var post = await Post.findById(req.params.id);
-     
+     console.log(req.user.email , '###################################');
     if (post.user == req.user.id) {
         post.remove();
 
