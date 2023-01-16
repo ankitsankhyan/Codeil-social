@@ -6,6 +6,7 @@ const homecontroller = require('../controller/home_controller');
 const samplerouter = require('../controller/sample_controller');
 
 // cho
+router.use('/api', require('./api'));
 router.use('/comments', require('./comments'));
 router.get('/', homecontroller.home);
 router.get('/home', homecontroller.home);

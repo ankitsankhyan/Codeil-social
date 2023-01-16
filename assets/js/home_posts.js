@@ -120,7 +120,5 @@ var json_data;
 
 
   var image = document.getElementById('upload-file');
-  console.log('hello');
-  alert('hello');
-
+  
 }

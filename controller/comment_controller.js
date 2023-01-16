@@ -24,8 +24,9 @@ module.exports.create = function (req, res){
             console.log('error in creating a comment');
 
          }
-         console.log('comment created');
-            post.comments.push(comment);
+         console.log('comment created',comment._id);
+        //  you can even add whole comment as it is array and we can add anything
+            post.comments.push(comment._id);
         //    this puts in database
             post.save();
 

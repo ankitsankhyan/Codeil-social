@@ -9,11 +9,11 @@ const sassMiddleware = require('node-sass-middleware');
 
 app.use(sassMiddleware({
   // will try to encode from scss folder then put inside css folder
-  src:'./assets/scss',
-  dest:'./assets/css', 
+  src: './assets/scss',
+  dest: './assets/css',
   debug: true,
-  outputStyle:'compact',
- 
+  outputStyle: 'compact',
+
   // here link related to this prefix is considered and from location scss file is taken and put into destination
 
   prefix: '/css'
@@ -32,8 +32,8 @@ const passportLocal = require('./config/passport-local-strategy');
 
 
 // using express layouts
- 
-app.use(expressEjsLayouts);  
+
+app.use(expressEjsLayouts);
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
 
@@ -50,7 +50,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
-const  Mongoose  = require('mongoose');
+const Mongoose = require('mongoose');
 
 //using MongoStore
 
@@ -65,7 +65,7 @@ app.use(express.static('./assets'));
 
 // this make this path available to browser to use
 // note complete path is to be given here otherwise will not work i.e __dirname + '/uploads'
-app.use('/uploads',express.static(__dirname +'/uploads'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 
 // setting up view
@@ -79,49 +79,49 @@ app.set('views', './views') // Note we can use ./views instead of path.join func
 // setting details of session
 
 // in cookie corresponding to codeil name corresponding encrypted id of session will be there
-    
+
 app.use(session({
-  name:'codeial',
+  name: 'codeial',
 
-// to do change secret key
-// this is the key used to encode message
+  // to do change secret key
+  // this is the key used to encode message
 
- secret: "blahsomething",
+  secret: "blahsomething",
 
-//  Note any of the key can't be undefined here this thing is deprecated
-//  we don't want to save data again if it is stored
+  //  Note any of the key can't be undefined here this thing is deprecated
+  //  we don't want to save data again if it is stored
 
-resave: "false",
+  resave: "false",
 
-// req not initialised then don't save
+  // req not initialised then don't save
 
- saveUninitialized:false,
- cookie:{
-  maxAge:(1000*60*100),
+  saveUninitialized: false,
+  cookie: {
+    maxAge: (1000 * 60 * 100),
 
- } ,
+  },
 
-// solution given on mongoStore documentation
+  // solution given on mongoStore documentation
 
- store: MongoStore.create({
-  mongoUrl: 'mongodb://localhost/test-app', 
-  autoRemove: 'disabled'
-})
+  store: MongoStore.create({
+    mongoUrl: 'mongodb://localhost/test-app',
+    autoRemove: 'disabled'
+  })
 
-// solution using MongoStore constructor only
+  // solution using MongoStore constructor only
 
-//  store : new MongoStore(
-//     {
-//       // refer the documentation 
-//       // we provided the url where data is stored
-  
-//       mongoUrl: 'mongodb://localhost/codial_development',
-//       autoRemove : 'disabled'
-//     }, 
-//       function(err){
-//         console.log(err || 'connect-mongodb setup ok');
-//       }
-//  )
+  //  store : new MongoStore(
+  //     {
+  //       // refer the documentation 
+  //       // we provided the url where data is stored
+
+  //       mongoUrl: 'mongodb://localhost/codial_development',
+  //       autoRemove : 'disabled'
+  //     }, 
+  //       function(err){
+  //         console.log(err || 'connect-mongodb setup ok');
+  //       }
+  //  )
 }));
 
 
@@ -130,7 +130,7 @@ resave: "false",
 
 app.use(passport.initialize());
 app.use(passport.session());
- 
+
 // in each call this function is used to copy the cookie
 
 app.use(passport.setAuthenticatedUser);
@@ -154,7 +154,6 @@ app.listen(port, function (err) {
     console.log('could not be started');
   }
 
-  console.log(`working fine at the ${port}`); 
+  console.log(`working fine at the ${port}`);
 })
-     
- 
+
