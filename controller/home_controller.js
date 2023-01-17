@@ -21,10 +21,13 @@ module.exports.home = async function (req, res) {
       }
 
     }).sort('-createdAt');
-  var c = post_all.comments;
+    // console.log(post_all);
+    // console.log(post_all.comments);
+      // post_all.comments =post_all.comments.reverse();
+  // post_all.save();
   post_all.forEach((e) => {
 
-  //  e.comments = e.comments.sort('-createdAt');
+  e.comments = e.comments.reverse();
     
   })
   var friend = await user.find({});
@@ -32,7 +35,8 @@ module.exports.home = async function (req, res) {
     title: 'Home',
     local: res.locals,
     post: post_all,
-    friends: friend
+    friends: friend,
+   
   })
   }catch(err){
     console.log(err);

@@ -46,6 +46,7 @@ module.exports.favarate_sport = function (req, res) {
 
 
 module.exports.signup = function (req, res) {
+    req.flash('success', 'You are logged in');
     return res.render('sign_up.ejs', {
         title: 'sign-up page',
         local: res.locals
@@ -53,6 +54,7 @@ module.exports.signup = function (req, res) {
 }
 
 module.exports.signIn = function (req, res) {
+   req.flash('success', 'you are logged in');
     return res.render('sign_in', {
         title: "Codiel| sign-in",
         local: res.locals
@@ -102,8 +104,8 @@ module.exports.create = async function (req, res) {
 
 module.exports.createSession = function (req, res) {
     req.flash('success', 'You are logged in');
-
-    return res.redirect('/user/profile');
+ 
+    return res.redirect('back');
 }
 
 module.exports.destroySession = function (req, res) {
@@ -116,7 +118,7 @@ module.exports.destroySession = function (req, res) {
         }
         // note req.flash must be called after calling logout function
         req.flash('success', 'You are logged out');
-        res.redirect('/');
+        res.redirect('back');
     });
 
 

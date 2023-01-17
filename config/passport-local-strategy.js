@@ -20,7 +20,8 @@ passport.use(new localstratagy({
             req.flash('error', 'Invalid user name / password');
            return done(null, false);
         }
-
+        req.flash('success', 'Successful Sign-in');
+        // console.log('runnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnniiiiiiiiiiiiiiiiiiiiiiiiiiiiigggggggggggggggggggg');
         return done(null, user);
     });
 }))
@@ -28,6 +29,7 @@ passport.use(new localstratagy({
 // put user id in cookie in encrypted manner in req.user
 
 passport.serializeUser(function(user,done){
+   
     done(null, user.id);
 })
  

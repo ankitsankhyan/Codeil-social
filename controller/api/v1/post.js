@@ -31,7 +31,7 @@ module.exports.index =async function(req, res){
     //     message:'from iiit gwalior' 
     // } );
 
-    var post =await Post.find({}).populate('user').populate({
+    var post =await Post.find({}).sort('-createdAt').populate('user').populate({
         // this helps in populating comments
        
         path: 'comments',
@@ -48,7 +48,11 @@ module.exports.index =async function(req, res){
     }
         
        
-    )
+    );
+
+    // post.forEach((e) =>{
+    //       e.comments.sort('-createdAt');
+    // })
 
     return res.status(200).json({
         posts:  post
@@ -67,7 +71,7 @@ module.exports.destroy = async function(req, res){
                 console.log(err);
              })
     })
-
+  post.remove();
     return res.status(200).json({
         data: post
     });
