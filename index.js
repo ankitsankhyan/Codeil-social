@@ -6,7 +6,7 @@ const port = 8000;
 const app = express();
 // 
 const sassMiddleware = require('node-sass-middleware');
-
+const passportJWT = require('./config/passport-jwt-passport');
 app.use(sassMiddleware({
   // will try to encode from scss folder then put inside css folder
   src: './assets/scss',

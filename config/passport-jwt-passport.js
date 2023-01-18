@@ -1,15 +1,21 @@
-var JwtStrategy = require('passport-jwt').Strategy,
-    ExtractJwt = require('passport-jwt').ExtractJwt;
+const passport = require('passport');
+var JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const User = require('../model/user');
 var opts = {}
+
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+// this is server key
 opts.secretOrKey = 'IIITM Gwalior';
 
 
 // using strategy
 // note user id  and password were not compared
 passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
-    User.findOne({ id: jwt_payload.sub }, function (err, user) {
+//   user detail is present in jwt_payload it is checked if user is present or not
+    User.findOne({ id: jwt_payload._id }, function (err, user) {
         if (err) {
+            console.log('error in finding user from JWT');
             return done(err, false);
         }
         if (user) {
@@ -20,3 +26,5 @@ passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
         }
     });
 }));
+
+module.exports = passport;
