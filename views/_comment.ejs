@@ -1,15 +1,14 @@
 
-   
-      <div><%= comment.content %></div>  
-      <% if (local.user && local.user.id == comment.user.id){ %>
-        <small>
-            <a href="/comments/destroy/<%= comment.id %>">X</a>
-        </small>
-        <% } %>
-        
-      <small><%= comment.user.name %></small>   
-         <br>
-      <%}%>
+   <div><%= comment.content %></div>  
+   <% if (local.user && local.user.id == comment.user.id){ %>
+     <small>
+         <a href="/comments/destroy/<%= comment.id %>"  id = "<%= comment.id %>">X</a>
+     </small>
+     <% } %>
+     
+   <small><%= comment.user.name %></small>   
+      <br>
+   <%}%>
   
 
      

@@ -12,7 +12,7 @@ opts.secretOrKey = 'codeil';
 // using strategy
 // note user id  and password were not compared
 passport.use(new JwtStrategy(opts, function (jwt_payload, done) {
-//   user detail is present in jwt_payload it is checked if user is present or not
+    //   user detail is present in jwt_payload it is checked if user is present or not
     User.findOne({ id: jwt_payload._id }, function (err, user) {
         if (err) {
             console.log('error in finding user from JWT');
