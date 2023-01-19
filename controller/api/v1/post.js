@@ -62,18 +62,26 @@ module.exports.index =async function(req, res){
 }
 
 module.exports.destroy = async function(req, res){
-
+console.log(req.params.id);
    var post = await Post.findById(req.params.id);
    console.log(post);
-
+   console.log(post.user,'post.user');
+   console.log(req.user.id, 'in user');
+  if(req.user.id == post.user){
     post.comments.forEach((e) => {
-             Comments.findByIdAndDelete(e, function(err){
-                console.log(err);
-             })
+        Comments.findByIdAndDelete(e, function(err){
+           console.log(err);
+        })
+})
+post.remove();
+return res.status(200).json({
+   data: post
+});
+  }else{
+    return res.status(401).json({
+        message: 'you can not delete message'
     })
-  post.remove();
-    return res.status(200).json({
-        data: post
-    });
+  }
+    
 
 }

@@ -3,10 +3,10 @@ var JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../model/user');
 var opts = {}
-
+// this will extract jwt from request
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 // this is server key
-opts.secretOrKey = 'IIITM Gwalior';
+opts.secretOrKey = 'codeil';
 
 
 // using strategy
