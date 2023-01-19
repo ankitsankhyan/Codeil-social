@@ -5,6 +5,7 @@ const customMware = require('./config/middleware')
 const port = 8000;
 const app = express();
 // 
+
 const sassMiddleware = require('node-sass-middleware');
 const passportJWT = require('./config/passport-jwt-passport');
 app.use(sassMiddleware({
@@ -18,6 +19,8 @@ app.use(sassMiddleware({
 
   prefix: '/css'
 }))
+
+const google_passport = require('../codial/config/passport-google-oath-strategy');
 const db = require('./config/mongoose');
 
 

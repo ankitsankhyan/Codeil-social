@@ -103,8 +103,8 @@ module.exports.create = async function (req, res) {
 
 
 module.exports.createSession = function (req, res) {
-    req.flash('success', 'You are logged in');
- 
+    // req.flash('success', 'You are logged in');
+   console.log(res);
     return res.redirect('back');
 }
 

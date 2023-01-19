@@ -31,5 +31,8 @@ router.post('/update/:id',passport.checkAuthentication, user_profile.update);
 
 router.get('/profile',passport.checkAuthentication,user_profile.profile);
 router.get('/profile/:id',passport.checkAuthentication,user_profile.random_id);
+router.get('/auth/google', passport.authenticate('google', {scope:['profile', 'email']}));
+router.get('/auth/google/callback', passport.authenticate('google', {failureRedirect:'/user/sign-in'}, user_profile.createSession));
+
 console.log('user route are connected successfully');
 module.exports = router;
