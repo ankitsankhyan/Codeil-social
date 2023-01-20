@@ -11,6 +11,7 @@ exports.newComment = (comment)=>{
     },(err, info)=>{
         if(err){
             console.log('error is there');
+            return;
         }
         console.log('info is' , info);
     }

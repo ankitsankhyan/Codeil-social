@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const newComment = require('../mailers/comment_mailers');
 const post = require('../model/post');
 const comment = require('../model/comment');
 
@@ -18,12 +18,17 @@ module.exports.create = function (req, res){
             content: req.body.content,
             post: req.body.post,
             user: req.user._id
-        },function(err, comment){
+        },async function(err, comment){
         //  this puts in RAM
          if(err){
             console.log('error in creating a comment');
 
          }
+      comment = await comment.populate('user');
+         
+      newComment.newComment(comment);
+   
+         console.log(comment,'created comment');
          console.log('comment created',comment._id);
         //  you can even add whole comment as it is array and we can add anything
             post.comments.push(comment._id);
