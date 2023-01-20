@@ -1,4 +1,7 @@
+
 const nodemailer = require('nodemailer');
+const path = require('path');
+const ejs = require('ejs')
 // defines user who send mail and service which is to be used
 let transporter = nodemailer.createTransport({
     service:'gmail',
@@ -18,7 +21,7 @@ let transporter = nodemailer.createTransport({
         path.join(__dirname, '../views/mailers', relativepath),
         data,
         function(err, template){
-            if(err){console.log('error in rendering template');
+            if(err){console.log('error in rendering template', err);
         return;}
         mailHtml = template;
         }
