@@ -2,20 +2,24 @@
 <h1>
   Codiel/ <%= title %>
 </h1>
-<div>
-  <section>
+<div class="hero">
+  <section id="Posts_comments_container">
   
     <ul>
       <%- include('_post.ejs') %>
   </ul>
+ 
   </section>
-  
-  <section>
+  <section id="Users_container" >
     <h3>Users</h3>
     <%for(f of friends){%>
-     <a href="//localhost:8000/user/profile/<%= f.id %>"><%= f.name %></a>
+     
+      
+  <a href="//localhost:8000/user/profile/<%= f.id %>">   <button><%= f.name %></button> </a>
+      <br>
     <%}%>
   </section>
+
   
 </div>
 
