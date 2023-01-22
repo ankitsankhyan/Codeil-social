@@ -6,20 +6,31 @@ body{
     background-color: #ccffff;
  font-family: sans-serif;
 
-    ul li {
+    ul {
+      // display: grid;
+      // grid-template-columns: 3fr 1fr 1fr;
+      .post {
       list-style-type: none;
       margin: auto;
-
-      div {
+    //  background-color: blue;
+      .post_added{
           padding: 10px;
           border-radius: 10px;
-          background-color:#66ffff;
+          background-color : red;
           margin: auto;
           border-style: solid;
           border-color: blue;
           border-width: 1px;
       }
 
+      .post-comments{
+        background-color: white;
+        margin-bottom: 10px;
+      }
+
       width: 500px;
   }
+    }
+    
+    
 }

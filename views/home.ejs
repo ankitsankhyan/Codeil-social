@@ -4,13 +4,7 @@
 </h1>
 <div>
   <section>
-    <% if(local.user){%>
-    <form action="/post/create" method="post" id="new-post-form" enctype="multipart/form-data">
-      <textarea name="content" id="" cols="50" rows="3" placeholder="Type here ...." required></textarea><br>
-      <input type="file" name="images" placeholder="put image">
-      <button type="submit">Submit</button>
-    </form>
-  <%}%>
+  
     <ul>
       <%- include('_post.ejs') %>
   </ul>

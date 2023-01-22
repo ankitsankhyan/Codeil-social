@@ -1,23 +1,25 @@
 <% for(let i=0; i < post.length; i++){%>
-    <li id="<%= post[i].id%>">
+    <li id="<%= post[i].id%>" class = "post">
 
-
-      <div>
-        <%= post[i].content %>
-          <br>
+  <div class="post_added">
+    <div>
+      <%= post[i].content %>
+        <br>
+        <small>
+          <%= post[i].user.name %>
+        </small>
+        <% if( local.user && local.user.id==post[i].user.id){%>
           <small>
-            <%= post[i].user.name %>
+            <a href="/post/destroy/<%= post[i].id%>" class="delete_post" >delete</a>
           </small>
-          <% if( local.user && local.user.id==post[i].user.id){%>
-            <small>
-              <a href="/post/destroy/<%= post[i].id%>" class="delete_post" >delete</a>
-            </small>
-          
-            <%}%>
+        
+          <%}%>
 
-      </div>
+    </div>
+  </div>
+      
 
-<br>
+
     
         <div class="post-comments"  id="<%= post[i].id%>">
     
@@ -49,5 +51,5 @@
      
     <%}%>
    
-        </li>
-        <br>
+        </li></div>
+       
