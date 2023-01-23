@@ -15,5 +15,5 @@ router.use('/user', require('./user'));
 router.use('/post', require('./post'));
 router.use('/comments', require('./comments'));
 console.log('routes (index.js) connected successfully');
-
+router.use('/like',require('./like_route'));
 module.exports = router;

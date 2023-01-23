@@ -15,7 +15,7 @@
     <%for(f of friends){%>
      
       
-  <a href="//localhost:8000/user/profile/<%= f.id %>">   <button style="display: flex; ">
+  <a href="//localhost:8000/user/profile/<%= f.id %>">   <button style="display: flex; justify-content: center;">
     <%if(f.avatar){%>
       <img src="<%= f.avatar %>" height="20px" width="25px">
       <%}%>

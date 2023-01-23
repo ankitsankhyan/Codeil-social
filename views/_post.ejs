@@ -10,13 +10,16 @@
     <div>
       <%= post[i].content %>
         <br>
-        
-        <% if( local.user && local.user.id==post[i].user.id){%>
-          <small>
-            <a href="/post/destroy/<%= post[i].id%>" class="delete_post" >delete</a>
-          </small>
-        
-          <%}%>
+    <div id="like-delete" style="display: flex; justify-content: space-between;">
+      <a href="/like/create/?id=<%=post[i].id%>&type=Post">Like- <%= post[i].likes.length %></a>
+      <% if( local.user && local.user.id==post[i].user.id){%>
+        <small>
+          <a href="/post/destroy/<%= post[i].id%>" class="delete_post" >delete</a>
+        </small>
+      
+        <%}%>
+    </div>
+      
 
     </div>
   </div>
