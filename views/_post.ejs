@@ -2,12 +2,15 @@
     <li id="<%= post[i].id%>" class = "post">
 
   <div class="post_added">
+   
+    <img src=  "<%=post[i].user.avatar%>" height="20px" width="25px"><br>
+    <small>
+      <%= post[i].user.name %>
+    </small>
     <div>
       <%= post[i].content %>
         <br>
-        <small>
-          <%= post[i].user.name %>
-        </small>
+        
         <% if( local.user && local.user.id==post[i].user.id){%>
           <small>
             <a href="/post/destroy/<%= post[i].id%>" class="delete_post" >delete</a>

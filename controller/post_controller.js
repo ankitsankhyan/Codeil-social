@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const Post = require('../model/post');
 const Comment = require('../model/comment');
-
+const path = require('path')
 module.exports.create = async function (req, res) {
-   console.log(req.body);
+  
     if (!req.isAuthenticated()) {
         res.redirect('/user/sign-in');
 
@@ -15,9 +15,9 @@ module.exports.create = async function (req, res) {
     try {
       var post_created = null;
       
-    
+  
       await  Post.uploadedImage(req, res,async function(err){
-        console.log(req.file, 'in post upload image');
+    
         if(err){
           console.log('error in uploaded image');
         }
@@ -27,7 +27,12 @@ module.exports.create = async function (req, res) {
           user: req.user.id,
           
       })
-     
+
+   console.log(Post.Imagepath);
+      if(req.file){
+        post_created.images =   path.join('/uploads/users/post_images')  + '/' +  req.file.filename;
+      }
+     console.log('final' , post_created);
       })
 //
 

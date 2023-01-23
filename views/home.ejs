@@ -3,7 +3,7 @@
   Codiel/ <%= title %>
 </h1>
 <div class="hero">
-  <section id="Posts_comments_container">
+  <section id="Posts_comments_container" >
   
     <ul>
       <%- include('_post.ejs') %>
@@ -15,7 +15,13 @@
     <%for(f of friends){%>
      
       
-  <a href="//localhost:8000/user/profile/<%= f.id %>">   <button><%= f.name %></button> </a>
+  <a href="//localhost:8000/user/profile/<%= f.id %>">   <button style="display: flex; ">
+    <%if(f.avatar){%>
+      <img src="<%= f.avatar %>" height="20px" width="25px">
+      <%}%>
+   
+    
+    <%= f.name %></button> </a>
       <br>
     <%}%>
   </section>

@@ -54,7 +54,7 @@ module.exports.signup = function (req, res) {
 }
 
 module.exports.signIn = function (req, res) {
-   req.flash('success', 'you are logged in');
+    req.flash('success', 'you are logged in');
     return res.render('sign_in', {
         title: "Codiel| sign-in",
         local: res.locals
@@ -62,7 +62,7 @@ module.exports.signIn = function (req, res) {
 }
 
 module.exports.create = async function (req, res) {
-  
+
 
 
     if (req.body.password != req.body.confirm_password) {
@@ -72,19 +72,19 @@ module.exports.create = async function (req, res) {
         var User = await user.findOne({ email: req.body.email });
         console.log(User);
         if (!User) {
-        var created_user;
+            var created_user;
             // if user does not exist then create user
-       await user.uploadedAvatar(req, res,async function(){
-            created_user = await user.create({
-                email: req.body.email,
-                password: req.body.password,
-                name: req.body.name,
-                avatar: user.avatarPath + '/' + req.file.filename
-                
-            });
-        })
-           
-           console.log(created_user,'new created user');
+            await user.uploadedAvatar(req, res, async function () {
+                created_user = await user.create({
+                    email: req.body.email,
+                    password: req.body.password,
+                    name: req.body.name,
+                    avatar: user.avatarPath + '/' + req.file.filename
+
+                });
+            })
+
+            console.log(created_user, 'new created user');
             return res.redirect('/user/sign-in');
 
         } else {
@@ -104,7 +104,7 @@ module.exports.create = async function (req, res) {
 
 module.exports.createSession = function (req, res) {
     // req.flash('success', 'You are logged in');
-   console.log(res);
+    console.log(res);
     return res.redirect('back');
 }
 
@@ -140,8 +140,8 @@ module.exports.update = async function (req, res) {
     // });
 
     var user_found = await user.findById(req.params.id);
-    
-    console.log(req.file,' outside ');
+
+    console.log(req.file, ' outside ');
     user.uploadedAvatar(req, res, function (err) {
         if (err) {
             console.log('error ', err);
@@ -157,16 +157,16 @@ module.exports.update = async function (req, res) {
             if (user_found.avatar) {
 
                 // unlinkSync function is used to delete things in synchronous manner i.e programme will wait for image to be deleted
-                if (fs.existsSync(path.join(__dirname , '..' , user_found.avatar))) {
-                   
-                    fs.unlinkSync(path.join(__dirname , '..' , user_found.avatar));
-                    
-                  }
-                console.log( user_found.avatar);
+                if (fs.existsSync(path.join(__dirname, '..', user_found.avatar))) {
+
+                    fs.unlinkSync(path.join(__dirname, '..', user_found.avatar));
+
+                }
+                console.log(user_found.avatar);
             }
             user_found.avatar = user.avatarPath + '/' + req.file.filename;
         }
         user_found.save();
         return res.redirect('back');
-    }) 
+    })
 }
