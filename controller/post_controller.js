@@ -29,10 +29,11 @@ module.exports.create = async function (req, res) {
           
       })
 
-   console.log(Post.Imagepath);
+         
       if(req.file){
         post_created.images =   path.join('/uploads/users/post_images')  + '/' +  req.file.filename;
       }
+      post_created.save();
      console.log('final' , post_created);
       })
 //
@@ -93,6 +94,8 @@ module.exports.destroy = async function (req, res) {
               message:'post deleted' 
             });
         }
+
+
         // req.flash('success', 'Post deleted Successfully');
         return res.redirect('back');
 

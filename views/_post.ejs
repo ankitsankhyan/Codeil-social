@@ -1,34 +1,42 @@
 <% for(let i=0; i < post.length; i++){%>
-    <li id="<%= post[i].id%>" class = "post">
+  <li id="<%= post[i].id%>" class="post">
 
-  <div class="post_added">
-   
-    <img src=  "<%=post[i].user.avatar%>" height="20px" width="25px"><br>
-    <small>
-      <%= post[i].user.name %>
-    </small>
-    <div>
-      <%= post[i].content %>
+    <div class="post_added">
+
+      <img src="<%=post[i].user.avatar%>" height="20px" width="25px"><br>
+      <small>
+        <%= post[i].user.name %>
         <br>
-    <div id="like-delete" style="display: flex; justify-content: space-between;">
-      <a href="/like/create/?id=<%=post[i].id%>&type=Post">Like- <%= post[i].likes.length %></a>
-      <% if( local.user && local.user.id==post[i].user.id){%>
-        <small>
-          <a href="/post/destroy/<%= post[i].id%>" class="delete_post" >delete</a>
-        </small>
-      
+      </small>
+      <%if(post[i].images){%>
+
+        <img src="<%=post[i].images%>" height="100%" width="100%">
+
         <%}%>
+
+
+          <div>
+            <%= post[i].content %>
+              <br>
+              <div id="like-delete" style="display: flex; justify-content: space-between;">
+                <a href="/like/create/?id=<%=post[i].id%>&type=Post">Like- <%= post[i].likes.length %></a>
+                <% if( local.user && local.user.id==post[i].user.id){%>
+                  <small>
+                    <a href="/post/destroy/<%= post[i].id%>" class="delete_post">delete</a>
+                  </small>
+
+                  <%}%>
+              </div>
+
+
+          </div>
     </div>
-      
-
-    </div>
-  </div>
-      
 
 
-    
-        <div class="post-comments"  id="<%= post[i].id%>">
-    
+
+
+    <div class="post-comments" id="<%= post[i].id%>">
+
       <!-- form for adding commnent  -->
       <% if (local.user) {%>
         Add comment
@@ -39,26 +47,29 @@
 
         </form>
         <%}%>
-<!-- previous comments -->
-        Comments
-        <div>
-          <% for(comment of post[i].comments){%>
-     
-            <div><%= comment.content %></div>  
-       <% if (local.user && local.user.id == comment.user.id){ %>
-         <small>
-             <a href="/comments/destroy/<%= comment.id %>"  id = "<%= comment.id %>">X</a>
-         </small>
-         <% } %>
-         
-       <small><%= comment.user.name %></small>   
-          <br>
-       <%}%>
-      
-         
-        <%}%>
-        </div>
-      
-   
-        </li>
-       
+          <!-- previous comments -->
+          Comments
+          <div>
+            <% for(comment of post[i].comments){%>
+
+              <div>
+                <%= comment.content %>
+              </div>
+              <% if (local.user && local.user.id==comment.user.id){ %>
+                <small>
+                  <a href="/comments/destroy/<%= comment.id %>" id="<%= comment.id %>">X</a>
+                </small>
+                <% } %>
+
+                  <small>
+                    <%= comment.user.name %>
+                  </small>
+                  <br>
+                  <%}%>
+
+
+                    <%}%>
+          </div>
+
+
+  </li>
