@@ -111,11 +111,11 @@ var json_data;
 
 
 
-  for (let i = 0; i < anchor.length; i++) {
-    deletepost(anchor[i]);
-  }
+  // for (let i = 0; i < anchor.length; i++) {
+  //   deletepost(anchor[i]);
+  // }
 
-  createPost();
+  // createPost();
   // deleting comments
 
 

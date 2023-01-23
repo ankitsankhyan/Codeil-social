@@ -1,6 +1,6 @@
 
 const mongoose = require('mongoose');
-
+const fs = require('fs');
 const passport = require('passport');
 const Post = require('../model/post');
 const likes = require('../model/like');
@@ -31,7 +31,8 @@ module.exports.create = async function (req, res) {
 
          
       if(req.file){
-        post_created.images =   path.join('/uploads/users/post_images')  + '/' +  req.file.filename;
+        post_created.images =   path.join('/uploads/users/post_images'  + '/' +  req.file.filename);
+        console.log(post_created.images);
       }
       post_created.save();
      console.log('final' , post_created);
@@ -80,10 +81,17 @@ module.exports.destroy = async function (req, res) {
     var post = await Post.findById(req.params.id);
    
     if (post.user == req.user.id) {
-        post.remove();
+       
 
         await Comment.deleteMany({ post: req.params.id });
         await likes.deleteMany({likeable: req.params.id});
+
+console.log(path.join(__dirname ,'../' , post.images ));
+      if(fs.existsSync(path.join(__dirname , '../' , post.images ))){
+        fs.unlinkSync(path.join(__dirname , '../' , post.images));
+      }
+       
+      post.remove();
 
         if(req.xhr){
           console.log('proceding to delete')

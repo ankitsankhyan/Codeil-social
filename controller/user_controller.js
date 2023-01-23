@@ -116,7 +116,7 @@ module.exports.destroySession = function (req, res) {
         if (err) {
             console.log(err);
         }
-        // note req.flash must be called after calling logout function
+       
         req.flash('success', 'You are logged out');
         res.redirect('back');
     });
