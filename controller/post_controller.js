@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const passport = require('passport');
 const Post = require('../model/post');
+const likes = require('../model/like');
 const Comment = require('../model/comment');
 const path = require('path')
 module.exports.create = async function (req, res) {
@@ -81,6 +82,7 @@ module.exports.destroy = async function (req, res) {
         post.remove();
 
         await Comment.deleteMany({ post: req.params.id });
+        await likes.deleteMany({likeable: req.params.id});
 
         if(req.xhr){
           console.log('proceding to delete')

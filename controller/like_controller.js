@@ -45,7 +45,7 @@ if(req.query.type == 'Post'){
     existingLike.remove();
 
  }else{
-  console.log(req.user._id, '1233333333333333333333333333333333333333333');
+  
 
     let newlike = await Like.create({
         user: req.user._id,
