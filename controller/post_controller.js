@@ -79,17 +79,19 @@ module.exports.destroy = async function (req, res) {
 
    console.log(req.user.id , 'destroy of post controller');
     var post = await Post.findById(req.params.id);
-   
+   console.log(post);
     if (post.user == req.user.id) {
        
 
         await Comment.deleteMany({ post: req.params.id });
-        await likes.deleteMany({likeable: req.params.id});
+        await likes.deleteMany({likeable: req.params.id, onModel:'Post'} );
 
-console.log(path.join(__dirname ,'../' , post.images ));
-      if(fs.existsSync(path.join(__dirname , '../' , post.images ))){
-        fs.unlinkSync(path.join(__dirname , '../' , post.images));
+    if(post.images){
+      if(fs.existsSync(path.join(__dirname , '..' , post.images ))){
+        fs.unlinkSync(path.join(__dirname , '..' , post.images));
       }
+    }
+     
        
       post.remove();
 

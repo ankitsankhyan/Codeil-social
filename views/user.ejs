@@ -10,7 +10,7 @@
 
 
    
-    <% if(local.user){%>
+    <% if(local.user.id == user.id){%>
       <form action="/post/create" method="post" id="new-post-form" enctype="multipart/form-data">
         <textarea name="content" id="" cols="50" rows="3" placeholder="Type here ...." required></textarea><br>
         <input type="file" name="images" placeholder="put image">
