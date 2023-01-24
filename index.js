@@ -4,7 +4,16 @@ const flash = require('connect-flash');
 const customMware = require('./config/middleware')
 const port = 8000;
 const app = express();
-// 
+
+
+// setup sockets
+
+
+const chatserver = require('http').Server(app);
+const chatSockets = require('./config/chatsocket').chatSockets(chatserver);
+chatserver.listen(5000);
+console.log('chat server is listening on port 5000');
+
 
 const sassMiddleware = require('node-sass-middleware');
 const passportJWT = require('./config/passport-jwt-passport');
