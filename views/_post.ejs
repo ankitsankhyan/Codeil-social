@@ -52,23 +52,32 @@
           <div>
             <% for(comment of post[i].comments){%>
 
-              <div>
+              <p style="padding:10px;">
                 <%= comment.content %>
-              </div>
+              </p>
+               
+             
               <% if (local.user && local.user.id==comment.user.id){ %>
-                <div style="display: flex; justify-content: space-between;">
+                <div style="display: flex; justify-content: space-between; padding: 5px;">
                   <small > <a href="/like/create/?id=<%=comment.id%>&type=Comment">Like-<%=comment.likes.length%></a></small>
+                  <small>
+                    <%= comment.user.name %>
+                  </small>
                   <small>
                     <a href="/comments/destroy/<%= comment.id %>" id="<%= comment.id %>">X</a>
                   </small>
                   
+                
                 </div>
               
-                <% } %>
-
+                <% }else {%>
                   <small>
                     <%= comment.user.name %>
                   </small>
+                  <hr>
+                  <%}%>
+<hr>
+                  
                   <br>
                   <%}%>
 
