@@ -5,11 +5,11 @@ class ChatEngine{
         this.userEmail = userEmail;
 
 // this sends connection request using socket
-
+// here in transports we are specifiying that 
         this.socket = io.connect('http://localhost:5000',{ transports : ['websocket'] });
 
         // if user mail is present then call connection handler
-
+             console.log(userEmail, 'checking userEmail');
         if(this.userEmail){
             this.connectionHandler();
         }
@@ -21,8 +21,15 @@ class ChatEngine{
     // this method replies when a connection is established 
         connectionHandler(){
             // when connect event occurs then callback function is called
-            this.socket.io('connect', function(){
-                console.log('connection establised using sockets...!');
+            let self = this;
+            console.log('inside connection handler')
+            this.socket.emit('join_room', function(){
+                 
+                self.socket.emit('join_room', {
+                    User_Email: self.userEmail,
+                    chatroom:'ankit_chat_room'
+                })
             })
+           
         }
     }

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css/home.ejs">
+<link rel="stylesheet" href="css/home.css">
 <h1>
   Codiel/ <%= title %>
 </h1>
@@ -35,6 +35,7 @@
 <%if(local.user){%>
   <script>
     // passing id of chatengine to user and user id
-    new ChatEngine('user-chat-box', '<%= local.user._id %>');
+    
+    new ChatEngine('user-chat-box', '<%=local.user.email%>');
   </script>
 <%}%>
