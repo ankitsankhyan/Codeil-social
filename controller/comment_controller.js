@@ -24,8 +24,9 @@ module.exports.create = function (req, res){
             console.log('error in creating a comment');
 
          }
-      comment = await comment.populate('user');
          
+      comment = await comment.populate('user');
+    
       newComment.newComment(comment);
    
          console.log(comment,'created comment');
@@ -34,7 +35,12 @@ module.exports.create = function (req, res){
             post.comments.push(comment._id);
         //    this puts in database
             post.save();
-
+           return res.status(200).json({
+            data:{
+                comment:comment
+            },
+            message:'comment is created'
+           })
             res.redirect('/');
         })
        } 

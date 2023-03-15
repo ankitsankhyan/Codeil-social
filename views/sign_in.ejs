@@ -1,17 +1,30 @@
 
-<link rel="stylesheet" href="/css/sign_in.css">
+
 <h1>Sign-in Here</h1>
 
-<form action="/user/create-session" method="post">
-               <input type="email" name="email" placeholder="email" required>
-               <br>
+<form action="/user/create-session" method="post" style="width: 300px; margin: auto;">
+  
+      
+        <div class="form-floating">
+            <input type="email" name="email" class="form-control form-control-sm" placeholder="ABC"  id="email" required >
+            <label for="email">Email</label>
+            <div class="valid-feedback">Valid Email</div>
+            <div class="invalid-feedback">Invalid Email</div>
+
+
+            
+        </div>
+        <div class="form-floating">
+            <input type="password" name="password"  class="form-control form-control-sm" placeholder="Pass" id="pas">
+            <label for="pas">Password</label>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
               
-               <input type="password" name="password" placeholder="password" required>
-               <br>
-               <input type="submit" value="sign-in">
               
               
-              
-</form>
-<button> <a href="/user/auth/google" id="link"><h4>Sign-in with</h4> <i class="fa fa-google-plus" style="font-size:24px"></i></a></button>
+
+<button class="btn btn-secondary"> <a href="/user/auth/google" id="link"> <i class="fa fa-google-plus" style="font-size:24px"></i></a></button>
 

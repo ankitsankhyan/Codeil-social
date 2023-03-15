@@ -1,7 +1,7 @@
 const post = require('../model/post');
 const user = require('../model/user');
 module.exports.home = async function (req, res) {
-  console.log(res.locals, 'in home');
+  console.log(res.locals.user, 'in home ###########');
 
 
   // user here is your attribute which you are populate
